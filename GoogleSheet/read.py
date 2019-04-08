@@ -1,7 +1,7 @@
 # This is where we read data from googlesheet and then use that data for webhook.
 def get_rate(bank_name, amount, time):
     # TODO: Get data from GoogleSheets.
-    rate = "4.8%" # Get from googlesheets based on the condition (bank_name, amount, time)
+    rate = "4.8%"  # Get from googlesheets based on the condition (bank_name, amount, time)
 
     # IF no loan amount and time, just give the first row while also giving the details. i.e.
     if amount == "":
