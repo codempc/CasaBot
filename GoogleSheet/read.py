@@ -9,4 +9,11 @@ def get_rate(bank_name, amount, time):
     if time == "":
         time = "30 years"  # Get data from googlesheets first row for time
 
-    return "The rate for " + bank_name + " with a loan amount of " + amount + " and year period of " + time + " is " + rate
+    print(type(bank_name))
+    print(type(amount))
+    print(type(time))
+    print(type(rate))
+
+    # TODO: Randomise words, not only using one.
+    return "The rate for " + bank_name + " with a loan amount of " + "$" + str(amount) + " and period of " + \
+        str(time) + " years is " + rate
