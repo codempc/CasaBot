@@ -22,7 +22,6 @@ def get_rate(bank_name, amount, time):
     return "The rate for " + bank_name + " with a loan amount of " + "$" + str(amount) + " and period of " + \
         str(time) + " years is " + rate
 
-
 def view_all_data(file_name):
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     creds = ServiceAccountCredentials.from_json_keyfile_name('bank_secret.json', scope)

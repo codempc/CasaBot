@@ -62,7 +62,6 @@ def rate(req):
         response = "Please specify the bank name!"
     else:
         response = get_rate(bank_name, loan_amount, loan_year_period)
-
     return response
 
 
