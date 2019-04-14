@@ -44,7 +44,6 @@ def webhook():
 
 
 def rate(req):
-    response = ""
     # Parsing the POST request body into a dictionary for easy access.
     intent_name = req['queryResult']['intent']['displayName']
     parameters = req['queryResult']['parameters']
@@ -58,8 +57,17 @@ def rate(req):
     loan_amount = parameters["loan_value"]
     loan_year_period = parameters["loan_year_period"]
     bank_name = parameters['Australian_Banks']
-    if bank_name == "":
-        response = "Please specify the bank name!"
+
+    if bank_name == "" and loan_amount == "" and loan_year_period == "":
+        response = "Sure, first start with telling me the bank name!"
+    elif bank_name == "" and loan_amount != "" and loan_year_period != "":
+        response = "Perfect! Lastly, tell me the bank you want to apply this home loan for"
+    elif loan_amount == "" and loan_year_period == "":
+        response = "Okay, next step! Tell me the loan amount and the loan period you want for"
+    elif loan_amount == "":
+        response = "Okay! Rate for " + bank_name + ", can you tell me the amount of loan value as well"
+    elif loan_year_period == "":
+        response = "Okay! Rate for " + bank_name + ", can you tell me the period of amount you want for?"
     else:
         response = get_rate(bank_name, loan_amount, loan_year_period)
     return response
