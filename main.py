@@ -31,17 +31,31 @@ def webhook():
     req = request.get_json(silent=True, force=True)
 
     try:
-        intent = req.get('queryResult').get('queryText')
+        intent = req.get('queryResult').get('intent').get('displayName')
     except AttributeError:
         return 'json error'
 
-    res = rate(req)
     print('Intent: ' + intent)
+    if intent == 'showRate':
+        res = rate(req);
+    elif intent == 'description':
+        res = description(req);
+
     print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return make_response(jsonify({'fulfillmentText': res}))
 
+def description(req):
+    parameters = req['queryResult']['parameters']
+
+    mortgage_type = parameters["Mortgage_types"]
+    if mortgage_type == "IO":
+        response = mortgage_type + " or Interest Only loan is a loan in which the borrower pays only the interest for some or all of the term, with the principal balance unchanged during the interest-only period."
+    elif mortgage_type == "P&I":
+        response = mortgage_type + " or Principal and Interest loan is a loan in which the borrower pays the portioon of principal with the interest in a certain period of time."
+
+    return response
 
 def rate(req):
     # Parsing the POST request body into a dictionary for easy access.
