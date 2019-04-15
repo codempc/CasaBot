@@ -46,9 +46,12 @@ def webhook():
 
     print('Intent: ' + intent)
     if intent == 'showRate':
-        res = rate(req);
+        res = rate(req)
     elif intent == 'description':
-        res = description(req);
+        res = description(req)
+    else:
+        # TODO: Fix the else statement for res with fallback intent?
+        res = rate(req)
 
     print(res)
     r = make_response(res)
@@ -60,11 +63,17 @@ def description(req):
 
     mortgage_type = parameters["Mortgage_types"]
     if mortgage_type == "IO":
-        response = mortgage_type + " or Interest Only loan is a loan in which the borrower pays only the interest for some or all of the term, with the principal balance unchanged during the interest-only period."
+        response = mortgage_type + " or Interest Only loan is a loan in which " \
+                                   "the borrower pays only the interest for some or all of the " \
+                                   "term, with the principal balance unchanged during the interest-only period."
     elif mortgage_type == "P&I":
-        response = mortgage_type + " or Principal and Interest loan is a loan in which the borrower pays the portioon of principal with the interest in a certain period of time."
-
+        response = mortgage_type + " or Principal and Interest loan is a loan in which " \
+                                   "the borrower pays the portioon of principal with " \
+                                   "the interest in a certain period of time."
+    else:
+        response = "Sorry, I do not understand what you mean."
     return response
+
 
 def rate(req):
     # Parsing the POST request body into a dictionary for easy access.
