@@ -17,6 +17,15 @@
 import json
 import os
 
+import random
+from show_rate_responses import (
+NO_INPUT,
+    NO_BANK,
+NO_LOAN_AMOUNT,
+NO_LOAN_PERIOD,
+ONLY_BANK
+)
+
 from flask import Flask, request, make_response, jsonify
 
 from GoogleSheet.read import get_rate
@@ -73,15 +82,24 @@ def rate(req):
     bank_name = parameters['Australian_Banks']
 
     if bank_name == "" and loan_amount == "" and loan_year_period == "":
-        response = "Sure, first start with telling me the bank name!"
-    elif bank_name == "" and loan_amount != "" and loan_year_period != "":
-        response = "Perfect! Lastly, tell me the bank you want to apply this home loan for"
+        response = random.choice(NO_INPUT)
+    elif bank_name == "" and (loan_amount != "" or loan_year_period != ""):
+        response = random.choice(NO_BANK)
     elif loan_amount == "" and loan_year_period == "":
-        response = "Okay, next step! Tell me the loan amount and the loan period you want for"
+        output_string = random.choice(ONLY_BANK)
+        response = output_string.format(
+            bank_name=bank_name
+        )
     elif loan_amount == "":
-        response = "Okay! Rate for " + bank_name + ", can you tell me the amount of loan value as well"
+        output_string = random.choice(NO_LOAN_AMOUNT)
+        response = output_string.format(
+            bank_name=bank_name
+        )
     elif loan_year_period == "":
-        response = "Okay! Rate for " + bank_name + ", can you tell me the period of amount you want for?"
+        output_string = random.choice(NO_LOAN_PERIOD)
+        response = output_string.format(
+            bank_name=bank_name
+        )
     else:
         response = get_rate(bank_name, loan_amount, loan_year_period)
     return response
