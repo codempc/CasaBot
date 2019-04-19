@@ -19,11 +19,11 @@ import os
 
 import random
 from show_rate_responses import (
-NO_INPUT,
+    NO_INPUT,
     NO_BANK,
-NO_LOAN_AMOUNT,
-NO_LOAN_PERIOD,
-ONLY_BANK
+    NO_LOAN_AMOUNT,
+    NO_LOAN_PERIOD,
+    ONLY_BANK
 )
 
 from flask import Flask, request, make_response, jsonify
@@ -46,17 +46,22 @@ def webhook():
 
     print('Intent: ' + intent)
     if intent == 'showRate':
-        res = rate(req)
+        res = show_rate(req)
     elif intent == 'description':
         res = description(req)
+    elif intent == 'compareRate':
+        res = compare_rate(req)
+    elif intent == 'bestRate':
+        res = best_rate(req)
     else:
         # TODO: Fix the else statement for res with fallback intent?
-        res = rate(req)
+        res = show_rate(req)
 
     print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return make_response(jsonify({'fulfillmentText': res}))
+
 
 def description(req):
     parameters = req['queryResult']['parameters']
@@ -75,9 +80,10 @@ def description(req):
     return response
 
 
-def rate(req):
+def show_rate(req):
     # Parsing the POST request body into a dictionary for easy access.
     intent_name = req['queryResult']['intent']['displayName']
+    user_text = req['queryResult']['queryText']
     parameters = req['queryResult']['parameters']
     print('Dialogflow Parameters:')
     print(json.dumps(parameters, indent=4))
@@ -111,6 +117,18 @@ def rate(req):
         )
     else:
         response = get_rate(bank_name, loan_amount, loan_year_period)
+    return response
+
+
+def compare_rate(req):
+    # TODO: Get the request and show right response.
+    response = "The comparison ..."
+    return response
+
+
+def best_rate(req):
+    # TODO: Get the request and show right response.
+    response = "The best rate today ..."
     return response
 
 
