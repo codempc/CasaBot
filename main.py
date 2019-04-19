@@ -75,6 +75,10 @@ def description(req):
         response = mortgage_type + " or Principal and Interest loan is a loan in which " \
                                    "the borrower pays the portioon of principal with " \
                                    "the interest in a certain period of time."
+    elif mortgage_type == "LVR":
+        response = mortgage_type + " or Loan to Value Ratio is calculated by dividing the loan amount " \
+                                   "by the actual purchase price or valuation of the property, then" \
+                                   " multiplying it by 100."
     else:
         response = "Sorry, I do not understand what you mean."
     return response
