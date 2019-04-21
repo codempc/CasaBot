@@ -1,6 +1,6 @@
 NO_INPUT = [
     'To give you a rate, I need you to tell me the bank name, loan amount and loan year period',
-    'Please start by telling me the bank name. loan amount and year period',
+    'Please start by telling me the bank name, loan amount and year period',
     'Sure, what is the bank name, loan amount and year period you want to apply this home loan for?'
 ]
 
@@ -14,7 +14,7 @@ ONLY_BANK = [
 NO_BANK = [
     'Sure, first start with telling me the bank name!',
     'Okay, please tell me the bank name?',
-    'Please provide me with the bank name!'
+    'Sure, next, please provide me with the bank name!'
 ]
 
 NO_LOAN_AMOUNT = [
