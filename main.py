@@ -86,11 +86,14 @@ def description(req):
     return response
 
 
+def get_parameters(req):
+    return req['queryResult']['parameters']
+
+
 def show_rate(req):
     # Parsing the POST request body into a dictionary for easy access.
     intent_name = req['queryResult']['intent']['displayName']
-    user_text = req['queryResult']['queryText']
-    parameters = req['queryResult']['parameters']
+    parameters = get_parameters(req)
     print('Dialogflow Parameters:')
     print(json.dumps(parameters, indent=4))
     print("intent name:", intent_name)
@@ -139,8 +142,25 @@ def best_rate(req):
 
 
 def rate_followup(req):
-    print(req)
-    response = "AHA"
+    parameters = get_parameters(req)
+    input_context = req["queryResult"]["outputContexts"][0]
+
+    if "Australian_Banks" not in parameters:
+        bank_name = input_context["parameters"]["Australian_Banks"]
+    else:
+        bank_name = parameters["Australian_Banks"]
+
+    if "loan_value" not in parameters:
+        loan_amount = input_context["parameters"]["loan_value"]
+    else:
+        loan_amount = parameters["loan_value"]
+
+    if "loan_year_period" not in parameters:
+        loan_year_period = input_context["parameters"]["loan_year_period"]
+    else:
+        loan_year_period = parameters["loan_year_period"]
+
+    response = get_rate(bank_name, loan_amount, loan_year_period)
     return response
 
 
