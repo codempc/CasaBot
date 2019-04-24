@@ -53,6 +53,8 @@ def webhook():
         res = compare_rate(req)
     elif intent == 'bestRate':
         res = best_rate(req)
+    elif intent == 'rate-followup':
+        res = rate_followup(req)
     else:
         # TODO: Fix the else statement for res with fallback intent?
         res = show_rate(req)
@@ -133,6 +135,12 @@ def compare_rate(req):
 def best_rate(req):
     # TODO: Get the request and show right response.
     response = "The best rate today ..."
+    return response
+
+
+def rate_followup(req):
+    print(req)
+    response = "AHA"
     return response
 
 
