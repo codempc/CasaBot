@@ -8,7 +8,7 @@ ONLY_BANK = [
     'Cool! Rate for {bank_name}, next step is to specify the loan amount and year period for the '
     'home loan you want to apply for',
     '{bank_name}, Understood! Please tell me the loan amount and year period as well!',
-    'Alrighty, the only steps left for me to show the rate is for you to tell me the loan amount and year period.'
+    'Alrighty, next! Tell me the how much and how long do you want to loan.'
 ]
 
 NO_BANK = [
