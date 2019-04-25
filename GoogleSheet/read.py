@@ -1,7 +1,8 @@
 # This is where we read data from googlesheet and then use that data for webhook.
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 import pprint
+from oauth2client.service_account import ServiceAccountCredentials
+from tabulate import tabulate
 
 
 def get_rate(bank_name, amount, time):
@@ -28,6 +29,17 @@ def get_rate(bank_name, amount, time):
         str(time['amount']) + " " + time_unit + " is " + rate
 
 
+def get_best_rate(bank_name = "", amount = "", time="", mortage_types=""):
+    # TODO: Get the list of arrays from the read function from GoogleSheets.
+    # TODO: Format data for the result should be in array like below
+    #  (although in the real situation we should show more columns).
+    result = [['CommBank', '4%'], ['Westpac', '3.8%'],
+              ['St. George', '3.72%'], ['Suncorp', '3.34%'],
+              ['ANZ', '3.28%']]
+    result = tabulate(result, headers=['Bank', 'Rate'], tablefmt='orgtbl')
+    return result
+
+
 def view_all_data(file_name):
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     creds = ServiceAccountCredentials.from_json_keyfile_name('bank_secret.json', scope)
@@ -35,6 +47,11 @@ def view_all_data(file_name):
 
     sheet = client.open(file_name.lower()).sheet1
 
+    # TODO: Get 5 with the highest rate (no condition).
+    # TODO: Get 5 with the highest rate for different bank
+    # TODO: Get 5 with the highest rate for different amount of money.
+    # TODO: Get 5 with the highest rate for different period
+    # TODO: Get 5 with the highest rate for different mortgage types.
     pp = pprint.PrettyPrinter()
     result = sheet.get_all_records()
     pp.pprint(result)
