@@ -18,6 +18,10 @@ import json
 import os
 
 import random
+
+from flask import Flask, request, make_response, jsonify
+from tabulate import tabulate
+from GoogleSheet.read import get_rate
 from show_rate_responses import (
     NO_INPUT,
     NO_BANK,
@@ -25,10 +29,6 @@ from show_rate_responses import (
     NO_LOAN_PERIOD,
     ONLY_BANK
 )
-
-from flask import Flask, request, make_response, jsonify
-
-from GoogleSheet.read import get_rate
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -136,8 +136,13 @@ def compare_rate(req):
 
 
 def best_rate(req):
+    # TODO: Get the list of arrays from the read function from GoogleSheets.
+    rate_tables = [['CommBank', '4%'], ['Westpac', '3.8%'],
+                   ['St. George', '3.72%'], ['Suncorp', '3.34%'],
+                   ['ANZ', '3.28%']]
+
     # TODO: Get the request and show right response.
-    response = "The best rate today ..."
+    response = tabulate(rate_tables, headers=['Bank', 'Rate'], tablefmt='orgtbl')
     return response
 
 
