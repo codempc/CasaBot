@@ -142,8 +142,10 @@ def best_rate(req):
 
 def rate_followup(req):
     parameters = get_parameters(req)
-
-    if parameters["Australian_Banks"] != "" :
+    bank_name = ""
+    loan_amount = ""
+    loan_year_period = ""
+    if parameters["Australian_Banks"] != "":
         bank_name = parameters["Australian_Banks"]
 
     if parameters["loan_value"] != "":
