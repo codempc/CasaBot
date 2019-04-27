@@ -37,6 +37,79 @@ def get_best_rate(bank_name="", amount="", time="", mortage_types=""):
     result = [['CommBank', '4%'], ['Westpac', '3.8%'],
               ['St. George', '3.72%'], ['Suncorp', '3.34%'],
               ['ANZ', '3.28%']]
+
+    table_card = {
+        "tableCard": {
+            "title": "AoG Table Card title",
+            "subtitle": "AoG Table Card subtitle",
+            "image": {
+                "url": "",
+                "accessibilityText": "Image description for screen readers"
+            },
+            "columnProperties": [
+                {
+                    "header": "Header 1"
+                },
+                {
+                    "header": "Header 2",
+                    "horizontalAlignment": "CENTER"
+                },
+                {
+                    "header": "Header 3",
+                    "horizontalAlignment": "CENTER"
+                }
+            ],
+            "rows": [
+                {
+                    "cells": [
+                        {
+                            "text": "Cell A1"
+                        },
+                        {
+                            "text": "Cell A2"
+                        },
+                        {
+                            "text": "Cell A3"
+                        },
+                    ]
+                },
+                {
+                    "cells": [
+                        {
+                            "text": "Cell B1"
+                        },
+                        {
+                            "text": "Cell B2"
+                        },
+                        {
+                            "text": "Cell B3"
+                        }
+                    ]
+                },
+                {
+                    "cells": [
+                        {
+                            "text": "Cell C1"
+                        },
+                        {
+                            "text": "Cell C2"
+                        },
+                        {
+                            "text": "Cell C3"
+                        }
+                    ]
+                }
+            ],
+            "buttons": [
+                {
+                    "title": "Button title",
+                    "openUrlAction": {
+                        "url": ""
+                    }
+                }
+            ]
+        }
+    }
     my_result = {
         "fulfillmentText": "This is a text response",
         "fulfillmentMessages": [
@@ -56,105 +129,65 @@ def get_best_rate(bank_name="", amount="", time="", mortage_types=""):
         ],
         "source": "example.com",
         "payload": {
-            # "google": {
-            #     "expectUserResponse": False,
-            #     "richResponse": {
-            #         "items": [
-            #             {
-            #                 "simpleResponse": {
-            #                     "textToSpeech": "Sure, Let's get your song playing"
-            #                 }
-            #             },
-            #             {
-            #                 "mediaResponse": {
-            #                     "mediaType": "AUDIO",
-            #                     "mediaObjects": [
-            #                         {
-            #                             "name": "Exercises",
-            #                             "description": "ex",
-            #                             "largeImage": {
-            #                                 "url": "http://storage.googleapis.com/automotive-media/album_art.jpg",
-            #                                 "accessibilityText": "..."
-            #                             },
-            #                             "contentUrl": 'hah'
-            #                         }
-            #                     ]
-            #                 }
-            #             }
-            #         ]
-            #     }
-            # },
-            "facebook": {
-                "tableCard": {
-                    "title": "AoG Table Card title",
-                    "subtitle": "AoG Table Card subtitle",
-                    "image": {
-                        "url": "",
-                        "accessibilityText": "Image description for screen readers"
-                    },
-                    "columnProperties": [
+            "google": {
+                "expectUserResponse": True,
+                "richResponse": {
+                    "items": [
                         {
-                            "header": "Header 1"
+                            "simpleResponse": {
+                                "textToSpeech": "This is a simple table example."
+                            }
                         },
                         {
-                            "header": "Header 2",
-                            "horizontalAlignment": "CENTER"
-                        },
-                        {
-                            "header": "Header 3",
-                            "horizontalAlignment": "CENTER"
-                        }
-                    ],
-                    "rows": [
-                        {
-                            "cells": [
-                                {
-                                    "text": "Cell A1"
-                                },
-                                {
-                                    "text": "Cell A2"
-                                },
-                                {
-                                    "text": "Cell A3"
-                                },
-                            ]
-                        },
-                        {
-                            "cells": [
-                                {
-                                    "text": "Cell B1"
-                                },
-                                {
-                                    "text": "Cell B2"
-                                },
-                                {
-                                    "text": "Cell B3"
-                                }
-                            ]
-                        },
-                        {
-                            "cells": [
-                                {
-                                    "text": "Cell C1"
-                                },
-                                {
-                                    "text": "Cell C2"
-                                },
-                                {
-                                    "text": "Cell C3"
-                                }
-                            ]
-                        }
-                    ],
-                    "buttons": [
-                        {
-                            "title": "Button title",
-                            "openUrlAction": {
-                                "url": ""
+                            "tableCard": {
+                                "rows": [
+                                    {
+                                        "cells": [
+                                            {
+                                                "text": "row 1 item 1"
+                                            },
+                                            {
+                                                "text": "row 1 item 2"
+                                            },
+                                            {
+                                                "text": "row 1 item 3"
+                                            }
+                                        ],
+                                        "dividerAfter": True
+                                    },
+                                    {
+                                        "cells": [
+                                            {
+                                                "text": "row 2 item 1"
+                                            },
+                                            {
+                                                "text": "row 2 item 2"
+                                            },
+                                            {
+                                                "text": "row 2 item 3"
+                                            }
+                                        ],
+                                        "dividerAfter": True
+                                    }
+                                ],
+                                "columnProperties": [
+                                    {
+                                        "header": "header 1"
+                                    },
+                                    {
+                                        "header": "header 2"
+                                    },
+                                    {
+                                        "header": "header 3"
+                                    }
+                                ]
                             }
                         }
                     ]
                 }
+            },
+            "facebook": {
+                table_card
             }
         }
     }
