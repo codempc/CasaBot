@@ -186,9 +186,7 @@ def get_best_rate(bank_name="", amount="", time="", mortage_types=""):
                     ]
                 }
             },
-            "facebook": {
-                table_card
-            }
+            "facebook": table_card
         }
     }
     res = json.dumps(my_result, indent=4)
