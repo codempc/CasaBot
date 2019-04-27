@@ -36,8 +36,60 @@ def get_best_rate(bank_name = "", amount = "", time="", mortage_types=""):
     result = [['CommBank', '4%'], ['Westpac', '3.8%'],
               ['St. George', '3.72%'], ['Suncorp', '3.34%'],
               ['ANZ', '3.28%']]
+    my_result = {
+        "fulfillmentText": "This is a text response",
+        "fulfillmentMessages": [
+            {
+                "card": {
+                    "title": "card title",
+                    "subtitle": "card text",
+                    "imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
+                    "buttons": [
+                        {
+                            "text": "button text",
+                            "postback": "https://assistant.google.com/"
+                        }
+                    ]
+                }
+            }
+        ],
+        "source": "example.com",
+        "payload": {
+            # "google": {
+            #     "expectUserResponse": False,
+            #     "richResponse": {
+            #         "items": [
+            #             {
+            #                 "simpleResponse": {
+            #                     "textToSpeech": "Sure, Let's get your song playing"
+            #                 }
+            #             },
+            #             {
+            #                 "mediaResponse": {
+            #                     "mediaType": "AUDIO",
+            #                     "mediaObjects": [
+            #                         {
+            #                             "name": "Exercises",
+            #                             "description": "ex",
+            #                             "largeImage": {
+            #                                 "url": "http://storage.googleapis.com/automotive-media/album_art.jpg",
+            #                                 "accessibilityText": "..."
+            #                             },
+            #                             "contentUrl": 'hah'
+            #                         }
+            #                     ]
+            #                 }
+            #             }
+            #         ]
+            #     }
+            # },
+            "facebook": {
+                "text": "Hello, Facebook!"
+            },
+        }
+    }
     result = tabulate(result, headers=['Bank', 'Rate'], tablefmt='orgtbl')
-    return result
+    return my_result
 
 
 def view_all_data(file_name):
