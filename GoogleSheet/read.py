@@ -27,10 +27,10 @@ def get_rate(bank_name, amount, time):
 
     # TODO: Randomise words, not only using one.
     return "The rate for " + bank_name + " with a loan amount of " + "$" + str(amount) + " and period of " + \
-        str(time['amount']) + " " + time_unit + " is " + rate
+           str(time['amount']) + " " + time_unit + " is " + rate
 
 
-def get_best_rate(bank_name = "", amount = "", time="", mortage_types=""):
+def get_best_rate(bank_name="", amount="", time="", mortage_types=""):
     # TODO: Get the list of arrays from the read function from GoogleSheets.
     # TODO: Format data for the result should be in array like below
     #  (although in the real situation we should show more columns).
@@ -85,7 +85,76 @@ def get_best_rate(bank_name = "", amount = "", time="", mortage_types=""):
             #     }
             # },
             "facebook": {
-                "text": "Hello, Facebook!"
+                "tableCard": {
+                    "title": "AoG Table Card title",
+                    "subtitle": "AoG Table Card subtitle",
+                    "image": {
+                        "url": "",
+                        "accessibilityText": "Image description for screen readers"
+                    },
+                    "columnProperties": [
+                        {
+                            "header": "Header 1"
+                        },
+                        {
+                            "header": "Header 2",
+                            "horizontalAlignment": "CENTER"
+                        },
+                        {
+                            "header": "Header 3",
+                            "horizontalAlignment": "CENTER"
+                        }
+                    ],
+                    "rows": [
+                        {
+                            "cells": [
+                                {
+                                    "text": "Cell A1"
+                                },
+                                {
+                                    "text": "Cell A2"
+                                },
+                                {
+                                    "text": "Cell A3"
+                                },
+                            ]
+                        },
+                        {
+                            "cells": [
+                                {
+                                    "text": "Cell B1"
+                                },
+                                {
+                                    "text": "Cell B2"
+                                },
+                                {
+                                    "text": "Cell B3"
+                                }
+                            ]
+                        },
+                        {
+                            "cells": [
+                                {
+                                    "text": "Cell C1"
+                                },
+                                {
+                                    "text": "Cell C2"
+                                },
+                                {
+                                    "text": "Cell C3"
+                                }
+                            ]
+                        }
+                    ],
+                    "buttons": [
+                        {
+                            "title": "Button title",
+                            "openUrlAction": {
+                                "url": ""
+                            }
+                        }
+                    ]
+                }
             }
         }
     }
