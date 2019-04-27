@@ -46,7 +46,7 @@ def view_all_data(file_name):
     client = gspread.authorize(creds)
 
     sheet = client.open(file_name.lower()).sheet1
-
+    # TODO: Get maximum and minimum loan amount for a bank.
     # TODO: Get 5 with the highest rate (no condition).
     # TODO: Get 5 with the highest rate for different bank
     # TODO: Get 5 with the highest rate for different amount of money.
