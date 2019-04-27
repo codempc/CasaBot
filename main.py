@@ -46,13 +46,13 @@ def webhook():
     print('Intent: ' + intent)
     if intent == 'showRate':
         res = show_rate(req)
-        return make_response(jsonify(res))
     elif intent == 'description':
         res = description(req)
     elif intent == 'compareRate':
         res = compare_rate(req)
     elif intent == 'bestRate':
         res = best_rate(req)
+        return make_response(res)
     elif intent == 'rate-followup':
         res = rate_followup(req)
     else:

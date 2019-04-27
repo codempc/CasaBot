@@ -1,6 +1,7 @@
 # This is where we read data from googlesheet and then use that data for webhook.
 import gspread
 import pprint
+import json
 from oauth2client.service_account import ServiceAccountCredentials
 from tabulate import tabulate
 
@@ -85,11 +86,12 @@ def get_best_rate(bank_name = "", amount = "", time="", mortage_types=""):
             # },
             "facebook": {
                 "text": "Hello, Facebook!"
-            },
+            }
         }
     }
+    res = json.dumps(my_result, indent=4)
     result = tabulate(result, headers=['Bank', 'Rate'], tablefmt='orgtbl')
-    return my_result
+    return res
 
 
 def view_all_data(file_name):
