@@ -46,7 +46,6 @@ def webhook():
     print('Intent: ' + intent)
     if intent == 'showRate':
         res = show_rate(req)
-        return make_response(jsonify(res))
     elif intent == 'description':
         res = description(req)
     elif intent == 'compareRate':
@@ -143,23 +142,14 @@ def best_rate(req):
 
 def rate_followup(req):
     parameters = get_parameters(req)
-    input_context = req["queryResult"]["outputContexts"][0]
 
-    print("Input Context" + input_context)
-
-    if "Australian_Banks" not in parameters:
-        bank_name = input_context["parameters"]["Australian_Banks"]
-    else:
+    if parameters["Australian_Banks"] != "" :
         bank_name = parameters["Australian_Banks"]
 
-    if "loan_value" not in parameters:
-        loan_amount = input_context["parameters"]["loan_value"]
-    else:
+    if parameters["loan_value"] != "":
         loan_amount = parameters["loan_value"]
 
-    if "loan_year_period" not in parameters:
-        loan_year_period = input_context["parameters"]["loan_year_period"]
-    else:
+    if parameters["loan_year_period"] != "":
         loan_year_period = parameters["loan_year_period"]
 
     response = get_rate(bank_name, loan_amount, loan_year_period)
