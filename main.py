@@ -45,9 +45,7 @@ def webhook():
 
     print('Intent: ' + intent)
     if intent == 'showRate':
-        res = {'fulfillmentText': show_rate(req),
-               'outputContexts': req['queryResult']['outputContexts']
-               }
+        res = show_rate(req)
         return make_response(jsonify(res))
     elif intent == 'description':
         res = description(req)
