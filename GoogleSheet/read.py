@@ -2,13 +2,17 @@
 import gspread
 import pprint
 import json
+import random
 from oauth2client.service_account import ServiceAccountCredentials
 from tabulate import tabulate
+from show_rate_responses import (
+   SHOW_RATE_RESPONSE
+)
 
 
 def get_rate(bank_name, amount, time):
     # TODO: Get data from GoogleSheets.
-    rate = "4.8%"  # Get from googlesheets based on the condition (bank_name, amount, time)
+    rate = random.random() + 3  # Get from googlesheets based on the condition (bank_name, amount, time)
 
     # # IF no loan amount and time, just give the first row while also giving the details. i.e.
     # if amount == "":
@@ -26,17 +30,25 @@ def get_rate(bank_name, amount, time):
         time_unit = 'year' if time['amount'] == 1 else "years"
 
     # TODO: Randomise words, not only using one.
-    return "The rate for " + bank_name + " with a loan amount of " + "$" + str(amount) + " and period of " + \
-           str(time['amount']) + " " + time_unit + " is " + rate
+    output_string = random.choice(SHOW_RATE_RESPONSE)
+    response = output_string.format(
+        bank_name=bank_name,
+        amount=str(amount),
+        time=str(time['amount']),
+        time_unit=time_unit,
+        rate=round(rate, 2)
+
+    )
+    return response
 
 
 def get_best_rate(bank_name="", amount="", time="", mortage_types=""):
     # TODO: Get the list of arrays from the read function from GoogleSheets.
     # TODO: Format data for the result should be in array like below
     #  (although in the real situation we should show more columns).
-    result = [['CommBank', '4%'], ['Westpac', '3.8%'],
-              ['St. George', '3.72%'], ['Suncorp', '3.34%'],
-              ['ANZ', '3.28%']]
+    result = [['CommBank', '3.2%'], ['Westpac', '3.33%'],
+              ['St. George', '3.43%'], ['Suncorp', '3.57%'],
+              ['ANZ', '3.6%']]
 
     table_card = {
         "tableCard": {
@@ -189,9 +201,9 @@ def get_best_rate(bank_name="", amount="", time="", mortage_types=""):
             "facebook": table_card
         }
     }
-    res = json.dumps(my_result, indent=4)
+    # res = json.dumps(my_result, indent=4)
     result = tabulate(result, headers=['Bank', 'Rate'], tablefmt='orgtbl')
-    return res
+    return result
 
 
 def view_all_data(file_name):

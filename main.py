@@ -52,7 +52,6 @@ def webhook():
         res = compare_rate(req)
     elif intent == 'bestRate':
         res = best_rate(req)
-        return make_response(res)
     elif intent == 'rate-followup':
         res = rate_followup(req)
     else:

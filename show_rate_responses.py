@@ -29,3 +29,10 @@ NO_LOAN_PERIOD = [
     'Rate for {bank_name}, how long is this loan for?',
     'Okay, please tell me the duration of the loan as well'
 ]
+
+SHOW_RATE_RESPONSE = [
+    'The rate for {bank_name} with a loan amount of ${amount} and period of {time} {time_unit} is {rate}%',
+    'Your rate for Bank Name: {bank_name}, Loan Amount: ${amount}, Loan Payment Period: {time} {time_unit} is {rate}%',
+    'Understood! So you will be applying with {bank_name} needing about ${amount} '
+    'and will be paying that after {time} {time_unit}. Rate: {rate}%'
+]
