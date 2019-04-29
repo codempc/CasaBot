@@ -8,7 +8,11 @@ from tabulate import tabulate
 from show_rate_responses import (
    SHOW_RATE_RESPONSE
 )
+import pandas as pd
 
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+creds = ServiceAccountCredentials.from_json_keyfile_name('bank_secret.json', scope)
+client = gspread.authorize(creds)
 
 def get_rate(bank_name, amount, time):
     # TODO: Get data from GoogleSheets.
@@ -207,10 +211,6 @@ def get_best_rate(bank_name="", amount="", time="", mortage_types=""):
 
 
 def view_all_data(file_name):
-    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('bank_secret.json', scope)
-    client = gspread.authorize(creds)
-
     sheet = client.open(file_name.lower()).sheet1
     # TODO: Get maximum and minimum loan amount for a bank.
     # TODO: Get 5 with the highest rate (no condition).
@@ -222,3 +222,70 @@ def view_all_data(file_name):
     result = sheet.get_all_records()
     pp.pprint(result)
     return result
+
+# def get_lowest_rate(file_name, bank_name=None):
+#     sheet = client.open(file_name.lower()).sheet1
+#     interest_array = []
+#     for interest_rate in sheet.range('E2:E80'):
+#         interest_array.append(interest_rate.value)
+#
+#     lowest_rate = min(interest_array)
+#     print(lowest_rate)
+#     return lowest_rate
+
+def get_lowest_bank(file_name, bank_name=None, mortgage=None, yearFixed=None):
+    sheet = client.open(file_name.lower()).sheet1
+    data = pd.DataFrame(sheet.get_all_records())
+    if(bank_name != None and mortgage != None and yearFixed != None):
+        group = data.groupby('Bank_Name')
+        bank_programs = group.get_group(bank_name)
+        group = bank_programs.groupby('repaymentType')
+        bank_programs = group.get_group(mortgage)
+        group = bank_programs.groupby('fixedInterval')
+        bank_programs = group.get_group(yearFixed)
+        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = sorted.head(5)
+    elif(bank_name != None and mortgage != None):
+        group = data.groupby('Bank_Name')
+        bank_programs = group.get_group(bank_name)
+        group = bank_programs.groupby('repaymentType')
+        bank_programs = group.get_group(mortgage)
+        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = sorted.head(5)
+    elif(bank_name != None and yearFixed != None):
+        group = data.groupby('Bank_Name')
+        bank_programs = group.get_group(bank_name)
+        group = bank_programs.groupby('fixedInterval')
+        bank_programs = group.get_group(yearFixed)
+        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = sorted.head(5)
+    elif(mortgage != None and yearFixed != None):
+        group = data.groupby('repaymentType')
+        bank_programs = group.get_group(mortgage)
+        group = bank_programs.groupby('fixedInterval')
+        bank_programs = group.get_group(yearFixed)
+        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = sorted.head(5)
+    elif(bank_name != None):
+        group = data.groupby('Bank_Name')
+        bank_programs = group.get_group(bank_name)
+        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = sorted.head(5)
+    elif(mortgage != None):
+        group = data.groupby('repaymentType')
+        bank_programs = group.get_group(mortgage)
+        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = sorted.head(5)
+    elif(yearFixed != None):
+        group = data.groupby('fixedInterval')
+        bank_programs = group.get_group(yearFixed)
+        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = sorted.head(5)
+    else:
+        sorted = data.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = sorted.head(5)
+
+    print(top_lowest)
+    return top_lowest
+
+get_lowest_bank('casa_bank', bank_name='CommBank (CM)', mortgage='IO', yearFixed=1)
