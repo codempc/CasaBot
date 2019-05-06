@@ -57,23 +57,27 @@ def get_best_rate(num_best_rate, bank_name=None, mortgage_types=None, year_fixed
     # TODO: Format data for the result should be in array like below
     #  (although in the real situation we should show more columns).
 
-    result = (get_lowest_bank(num_best_rate, bank_name, mortgage_types, year_fixed).to_dict())
-    # How many is received from the result.
-    row_length = len(result['Bank_Name'])
-    # How many column.
-    column_length = len(result)
-    headers = []
-    content = [[0]*column_length for i in range(row_length)]
+    result = get_lowest_bank(num_best_rate, bank_name, mortgage_types, year_fixed)
 
-    # Iterate through the dictionary.
-    for index, value in enumerate(result.items()):
-        headers.append(value[0])
-        # print(key, value)
-        for childIndex, childValue in enumerate(value[1].items()):
-            content[childIndex][index] = (childValue[1])
+    content = ''
+
+    # # How many is received from the result.
+    # row_length = len(result['Bank_Name'])
+    # # How many column.
+    # column_length = len(result)
+    # headers = []
+    # content = [[0]*column_length for i in range(row_length)]
+    #
+    # # Iterate through the dictionary.
+    # for index, value in enumerate(result.items()):
+    #     headers.append(value[0])
+    #     # print(key, value)
+    #     for childIndex, childValue in enumerate(value[1].items()):
+    #         content[childIndex][index] = (childValue[1])
+    #
 
     # res = json.dumps(my_result, indent=4)
-    content = tabulate(content, headers=headers, tablefmt='orgtbl')
+    # content = tabulate(content, headers=headers, tablefmt='orgtbl')
     return content
 
 
@@ -81,8 +85,6 @@ def view_all_data(file_name):
     sheet = client.open(file_name.lower()).sheet1
     # TODO: Get 5 with the highest rate (no condition).
     # TODO: Get 5 with the highest rate for different bank
-    # TODO: Get 5 with the highest rate for different amount of money.
-    # TODO: Get 5 with the highest rate for different period
     # TODO: Get 5 with the highest rate for different mortgage types.
     pp = pprint.PrettyPrinter()
     result = sheet.get_all_records()
@@ -104,54 +106,54 @@ def view_all_data(file_name):
 def get_lowest_bank(num_best_rate, bank_name=None, mortgage=None, year_fixed=None):
     sheet = client.open('casa_bank').sheet1
     data = pd.DataFrame(sheet.get_all_records())
-    if (bank_name is not None and mortgage is not None and year_fixed is not None):
+    if bank_name is not None and mortgage is not None and year_fixed is not None:
         group = data.groupby('Bank_Name')
         bank_programs = group.get_group(bank_name)
         group = bank_programs.groupby('repaymentType')
         bank_programs = group.get_group(mortgage)
         group = bank_programs.groupby('fixedInterval')
         bank_programs = group.get_group(year_fixed)
-        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = sorted.head(num_best_rate)
-    elif (bank_name is not None and mortgage is not None):
+        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = result.head(num_best_rate)
+    elif bank_name is not None and mortgage is not None:
         group = data.groupby('Bank_Name')
         bank_programs = group.get_group(bank_name)
         group = bank_programs.groupby('repaymentType')
         bank_programs = group.get_group(mortgage)
-        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = sorted.head(num_best_rate)
-    elif (bank_name is not None and year_fixed is not None):
+        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = result.head(num_best_rate)
+    elif bank_name is not None and year_fixed is not None:
         group = data.groupby('Bank_Name')
         bank_programs = group.get_group(bank_name)
         group = bank_programs.groupby('fixedInterval')
         bank_programs = group.get_group(year_fixed)
-        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = sorted.head(num_best_rate)
-    elif (mortgage is not None and year_fixed is not None):
+        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = result.head(num_best_rate)
+    elif mortgage is not None and year_fixed is not None:
         group = data.groupby('repaymentType')
         bank_programs = group.get_group(mortgage)
         group = bank_programs.groupby('fixedInterval')
         bank_programs = group.get_group(year_fixed)
-        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = sorted.head(num_best_rate)
-    elif (bank_name is not None):
+        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = result.head(num_best_rate)
+    elif bank_name is not None:
         group = data.groupby('Bank_Name')
         bank_programs = group.get_group(bank_name)
-        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = sorted.head(num_best_rate)
-    elif (mortgage is not None):
+        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = result.head(num_best_rate)
+    elif mortgage is not None:
         group = data.groupby('repaymentType')
         bank_programs = group.get_group(mortgage)
-        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = sorted.head(num_best_rate)
-    elif (year_fixed is not None):
+        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = result.head(num_best_rate)
+    elif year_fixed is not None:
         group = data.groupby('fixedInterval')
         bank_programs = group.get_group(year_fixed)
-        sorted = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = sorted.head(num_best_rate)
+        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = result.head(num_best_rate)
     else:
-        sorted = data.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = sorted.head(num_best_rate)
+        result = data.sort_values(by=['interestRate'], ascending=True)
+        top_lowest = result.head(num_best_rate)
 
     print(top_lowest)
     return top_lowest
@@ -161,4 +163,5 @@ def get_lowest_bank(num_best_rate, bank_name=None, mortgage=None, year_fixed=Non
 # get_lowest_bank(bank_name='CommBank (CM)',
 #                 mortgage='IO', yearFixed=1)
 
+get_lowest_bank(5)
 # get_best_rate('CommBank (CM)', 'IO', 1)
