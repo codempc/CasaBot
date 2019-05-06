@@ -136,15 +136,12 @@ def compare_rate(req):
 
 def best_rate(req):
     # TODO: Get the request as parameter and show right response.
-    num_best_rate = 5
     bank_name = None
     mortgage_type = None
     year_fixed = None
 
     parameters = get_parameters(req)
 
-    if parameters['num_best_rate'] != "":
-        num_best_rate = int(parameters['num_best_rate'])
     if parameters['Australian_Banks'] != "":
         bank_name = parameters['Australian_Banks']
 
@@ -154,7 +151,7 @@ def best_rate(req):
     if parameters['fixed_year'] != "":
         year_fixed = parameters['fixed_year']
 
-    response = get_best_rate(num_best_rate, bank_name, mortgage_type, year_fixed)
+    response = get_best_rate(bank_name, mortgage_type, year_fixed)
     return response
 
 
