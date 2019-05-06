@@ -65,7 +65,7 @@ def get_best_rate(num_best_rate, bank_name=None, mortgage_types=None, year_fixed
     headers = []
     content = [[0]*column_length for i in range(row_length)]
 
-    ## Iterate through the dictionary.
+    # Iterate through the dictionary.
     for index, value in enumerate(result.items()):
         headers.append(value[0])
         # print(key, value)
@@ -73,7 +73,6 @@ def get_best_rate(num_best_rate, bank_name=None, mortgage_types=None, year_fixed
             content[childIndex][index] = (childValue[1])
 
     # res = json.dumps(my_result, indent=4)
-    print(content)
     content = tabulate(content, headers=headers, tablefmt='orgtbl')
     return content
 

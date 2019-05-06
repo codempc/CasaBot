@@ -144,7 +144,7 @@ def best_rate(req):
     parameters = get_parameters(req)
 
     if parameters['num_best_rate'] != "":
-        num_best_rate = parameters['num_best_rate']
+        num_best_rate = int(parameters['num_best_rate'])
     if parameters['Australian_Banks'] != "":
         bank_name = parameters['Australian_Banks']
 
