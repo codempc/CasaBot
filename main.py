@@ -152,18 +152,16 @@ def best_rate(req):
 def rate_followup(req):
     parameters = get_parameters(req)
     bank_name = ""
+    repayment_type = ""
     loan_amount = ""
     loan_year_period = ""
     if parameters["Australian_Banks"] != "":
         bank_name = parameters["Australian_Banks"]
 
-    if parameters["loan_value"] != "":
-        loan_amount = parameters["loan_value"]
+    if parameters["repayment_type"] != "":
+        repayment_type = parameters["repayment_type"]
 
-    if parameters["loan_year_period"] != "":
-        loan_year_period = parameters["loan_year_period"]
-
-    response = get_show_rate(bank_name, loan_amount, loan_year_period)
+    response = get_show_rate(bank_name, repayment_type)
     return response
 
 
