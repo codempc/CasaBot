@@ -7,9 +7,9 @@ import os
 from oauth2client.service_account import ServiceAccountCredentials
 from tabulate import tabulate
 import pandas as pd
-# from show_rate_responses import (
-#     SHOW_RATE_RESPONSE
-# )
+from show_rate_responses import (
+    SHOW_RATE_RESPONSE
+)
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 scope = ['https://spreadsheets.google.com/feeds',
@@ -18,7 +18,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name(dir_path + '/bank_secre
 client = gspread.authorize(creds)
 
 
-def get_rate(bank_name, amount, time):
+def get_show_rate(bank_name, repayment_type):
     # TODO: Get data from GoogleSheets.
     # Get from googlesheets based on the condition (bank_name, amount, time)
     rate = random.random() + 3
@@ -31,23 +31,25 @@ def get_rate(bank_name, amount, time):
     # TODO: Get maximum and minimum loan amount for a bank.
 
     # TODO: Fixed the required parameters for show rate.
-    if time['unit'] == "mo":
-        if time['amount'] > 48:
-            time['amount'] = format(time['amount'] / 12.0, '.1f')
-            time_unit = 'years'
-        else:
-            time_unit = 'month' if time['amount'] == 1 else "months"
-    else:
-        time_unit = 'year' if time['amount'] == 1 else "years"
+    # if time['unit'] == "mo":
+    #     if time['amount'] > 48:
+    #         time['amount'] = format(time['amount'] / 12.0, '.1f')
+    #         time_unit = 'years'
+    #     else:
+    #         time_unit = 'month' if time['amount'] == 1 else "months"
+    # else:
+    #     time_unit = 'year' if time['amount'] == 1 else "years"
+
+    result = get_lowest_bank(bank_name, repayment_type)
+
+    repayment_type = result['repaymentType'].item()
+    rate = result['interestRate'].item()
 
     output_string = random.choice(SHOW_RATE_RESPONSE)
     response = output_string.format(
         bank_name=bank_name,
-        amount=str(amount),
-        time=str(time['amount']),
-        time_unit=time_unit,
+        repayment_type=repayment_type,
         rate=round(rate, 2)
-
     )
     return response
 
@@ -169,4 +171,4 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
 
 #get_lowest_bank('CommBank (CM)')
 
-print(get_best_rate('CommBank (CM)', 'IO', 1))
+print(get_best_rate('CommBank', 'IO', 1))

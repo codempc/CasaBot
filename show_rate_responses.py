@@ -1,13 +1,12 @@
 NO_INPUT = [
-    'To give you a rate, I need you to tell me the bank name, loan amount and loan year period',
-    'Please start by telling me the bank name, loan amount and year period',
-    'Sure, what is the bank name, loan amount and year period you want to apply this home loan for?'
+    'To give you a specific rate, I need you to tell me the bank name and the repayment type (IO/P&I)',
+    'Please start by telling me the bank name and the repayment type (IO/P&I)',
+    'Sure, what is the bank name and what is your type of repayment (IO/P&I)?'
 ]
 
 ONLY_BANK = [
-    'Cool! Rate for {bank_name}, next step is to specify the loan amount and year period for the '
-    'home loan you want to apply for',
-    '{bank_name}, Understood! Please tell me the loan amount and year period as well!',
+    'Cool! Rate for {bank_name}, next, tell me the type of repayment as well (IO/P&I)? ',
+    '{bank_name}, Understood! Please tell me the type of repayment as well!',
     'Alrighty, next! Tell me the how much and how long do you want to loan.'
 ]
 
@@ -21,7 +20,6 @@ NO_LOAN_AMOUNT = [
     'Okay! Rate for {bank_name}, please tell me the loan amount you want for',
     'Rate for {bank_name}, how much is your required loan amount?',
     'Please tell me how much do you want to loan for?'
-
 ]
 
 NO_LOAN_PERIOD = [
@@ -31,8 +29,7 @@ NO_LOAN_PERIOD = [
 ]
 
 SHOW_RATE_RESPONSE = [
-    'The rate for {bank_name} with a loan amount of ${amount} and period of {time} {time_unit} is {rate}%',
-    'Your rate for Bank Name: {bank_name}, Loan Amount: ${amount}, Loan Payment Period: {time} {time_unit} is {rate}%',
-    'Understood! So you will be applying with {bank_name} needing about ${amount} '
-    'and will be paying that after {time} {time_unit}. Rate: {rate}%'
+    'The rate for {bank_name} with a repayment type {repayment_type} is {rate}%',
+    'Your rate for Bank Name: {bank_name}, Repayment Type: {repayment_type} is {rate}%',
+    'Understood! So you will be applying with {bank_name} for a mortgage type of {repayment_type}. Rate: {rate}%'
 ]

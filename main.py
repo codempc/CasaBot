@@ -20,7 +20,7 @@ import os
 import random
 
 from flask import Flask, request, make_response, jsonify
-from GoogleSheet.read import get_rate, get_best_rate
+from GoogleSheet.read import get_show_rate, get_best_rate
 from show_rate_responses import (
     NO_INPUT,
     NO_BANK,
@@ -99,32 +99,26 @@ def show_rate(req):
 
     # if the name of the bank is not given, then tell
     # them that they need to include the name of the bank.
-    # Accessing the fields on the POST request boduy of API.ai invocation of the webhook
-    loan_amount = parameters["loan_value"]
-    loan_year_period = parameters["loan_year_period"]
-    bank_name = parameters['Australian_Banks']
 
-    if bank_name == "" and loan_amount == "" and loan_year_period == "":
+    # TODO: CHECK LOAN AMOUNT AND LOAN YEAR SHOULD BE NEARING THE END TO CHECK IF THE AMOUNT AND PERIOD IS VALID. #####
+
+    # Accessing the fields on the POST request body of API.ai invocation of the webhook
+    # loan_amount = parameters["loan_value"]
+    # loan_year_period = parameters["loan_year_period"]
+    bank_name = parameters['Australian_Banks']
+    repayment_type = parameters['repayment_type']
+
+    if bank_name == "" and repayment_type == "":
         response = random.choice(NO_INPUT)
-    elif bank_name == "" and (loan_amount != "" or loan_year_period != ""):
+    elif bank_name == "":
         response = random.choice(NO_BANK)
-    elif loan_amount == "" and loan_year_period == "":
+    elif repayment_type == "":
         output_string = random.choice(ONLY_BANK)
         response = output_string.format(
             bank_name=bank_name
         )
-    elif loan_amount == "":
-        output_string = random.choice(NO_LOAN_AMOUNT)
-        response = output_string.format(
-            bank_name=bank_name
-        )
-    elif loan_year_period == "":
-        output_string = random.choice(NO_LOAN_PERIOD)
-        response = output_string.format(
-            bank_name=bank_name
-        )
     else:
-        response = get_rate(bank_name, loan_amount, loan_year_period)
+        response = get_show_rate(bank_name, repayment_type)
     return response
 
 
@@ -169,7 +163,7 @@ def rate_followup(req):
     if parameters["loan_year_period"] != "":
         loan_year_period = parameters["loan_year_period"]
 
-    response = get_rate(bank_name, loan_amount, loan_year_period)
+    response = get_show_rate(bank_name, loan_amount, loan_year_period)
     return response
 
 
