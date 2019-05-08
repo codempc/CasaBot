@@ -7,9 +7,6 @@ import os
 from oauth2client.service_account import ServiceAccountCredentials
 from tabulate import tabulate
 import pandas as pd
-from show_rate_responses import (
-    SHOW_RATE_RESPONSE
-)
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 scope = ['https://spreadsheets.google.com/feeds',
@@ -62,30 +59,21 @@ def get_best_rate(bank_name=None, mortgage_types=None, year_fixed=None):
     result = get_lowest_bank(bank_name, mortgage_types, year_fixed)
 
     bank = result['Bank_Name'].item()
-    mortgage = result['repaymentType'].item()
-    year = result['fixedInterval'].item()
+    repayment_type = result['repaymentType'].item()
+    year_fixed = result['fixedInterval'].item()
     interest = result['interestRate'].item()
+    details = {
+        "bank_name": bank,
+        "repayment_type": repayment_type,
+        "year_fixed":year_fixed,
+        "interest_rate":round(interest,2)
+    }
 
-    content = "The rate from " + bank + " with " + mortgage + " mortgage type and " \
-              + str(year) + " year(s) fixed rate is " + str(interest) + "%."
-    # # How many is received from the result.
-    # row_length = len(result['Bank_Name'])
-    # # How many column.
-    # column_length = len(result)
-    # headers = []
-    # content = [[0]*column_length for i in range(row_length)]
-    #
-    # # Iterate through the dictionary.
-    # for index, value in enumerate(result.items()):
-    #     headers.append(value[0])
-    #     # print(key, value)
-    #     for childIndex, childValue in enumerate(value[1].items()):
-    #         content[childIndex][index] = (childValue[1])
-    #
+    return details
 
-    # res = json.dumps(my_result, indent=4)
-    # content = tabulate(content, headers=headers, tablefmt='orgtbl')
-    return content
+    # content = "The rate from " + bank + " with " + mortgage + " mortgage type and " \
+    #           + str(year) + " year(s) fixed rate is " + str(interest) + "%."
+    # return content
 
 
 def view_all_data(file_name):
