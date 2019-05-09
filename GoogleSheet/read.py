@@ -14,43 +14,6 @@ scope = ['https://spreadsheets.google.com/feeds',
 creds = ServiceAccountCredentials.from_json_keyfile_name(dir_path + '/bank_secret.json', scope)
 client = gspread.authorize(creds)
 
-
-def get_show_rate(bank_name, repayment_type):
-    # TODO: Get data from GoogleSheets.
-    # Get from googlesheets based on the condition (bank_name, amount, time)
-    rate = random.random() + 3
-
-    # # IF no loan amount and time, just give the first row while also giving the details. i.e.
-    # if amount == "":
-    #     amount = "40000"  # Get data from googlesheets first row for amount
-    # if time == "":
-    #     time = "30"  # Get data from googlesheets first row for time
-    # TODO: Get maximum and minimum loan amount for a bank.
-
-    # TODO: Fixed the required parameters for show rate.
-    # if time['unit'] == "mo":
-    #     if time['amount'] > 48:
-    #         time['amount'] = format(time['amount'] / 12.0, '.1f')
-    #         time_unit = 'years'
-    #     else:
-    #         time_unit = 'month' if time['amount'] == 1 else "months"
-    # else:
-    #     time_unit = 'year' if time['amount'] == 1 else "years"
-
-    result = get_lowest_bank(bank_name, repayment_type)
-
-    repayment_type = result['repaymentType'].item()
-    rate = result['interestRate'].item()
-
-    output_string = random.choice(SHOW_RATE_RESPONSE)
-    response = output_string.format(
-        bank_name=bank_name,
-        repayment_type=repayment_type,
-        rate=round(rate, 2)
-    )
-    return response
-
-
 def get_best_rate(bank_name=None, mortgage_types=None, year_fixed=None):
     # TODO: Get the list of arrays from the get_lowest_bank function from GoogleSheets.
     # TODO: Format data for the result should be in array like below
@@ -68,7 +31,7 @@ def get_best_rate(bank_name=None, mortgage_types=None, year_fixed=None):
         "year_fixed":year_fixed,
         "interest_rate":round(interest,2)
     }
-
+    
     return details
 
     # content = "The rate from " + bank + " with " + mortgage + " mortgage type and " \
@@ -109,7 +72,10 @@ def get_lowest_rate_group_by(data, params):
                 group = bank_programs.groupby(key)
                 bank_programs = group.get_group(value)
     
-    result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+    if bank_programs is not None:
+        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+    else:
+        result = data.sort_values(by=['interestRate'], ascending=True)
     return result.head(1)
 
 
@@ -131,5 +97,5 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
 
 #get_lowest_bank('CommBank (CM)')
 
-print(get_best_rate('CommBank', 'IO', 1))
+print(get_best_rate())
 
