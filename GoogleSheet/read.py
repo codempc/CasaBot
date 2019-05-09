@@ -97,60 +97,32 @@ def view_all_data(file_name):
 #     print(lowest_rate)
 #     return lowest_rate
 
+def get_lowest_rate_group_by(data, params):
+    group = None
+    bank_programs = None
+    for key, value in params.items():
+        if value is not None:
+            if group is None:
+                group = data.groupby(key)
+                bank_programs = group.get_group(value)
+            else:
+                group = bank_programs.groupby(key)
+                bank_programs = group.get_group(value)
+    
+    result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+    return result.head(1)
+
 
 def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
     sheet = client.open('casa_bank').sheet1
     data = pd.DataFrame(sheet.get_all_records())
-    if bank_name is not None and mortgage is not None and year_fixed is not None:
-        group = data.groupby('Bank_Name')
-        bank_programs = group.get_group(bank_name)
-        group = bank_programs.groupby('repaymentType')
-        bank_programs = group.get_group(mortgage)
-        group = bank_programs.groupby('fixedInterval')
-        bank_programs = group.get_group(year_fixed)
-        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = result.head(1)
-    elif bank_name is not None and mortgage is not None:
-        group = data.groupby('Bank_Name')
-        bank_programs = group.get_group(bank_name)
-        group = bank_programs.groupby('repaymentType')
-        bank_programs = group.get_group(mortgage)
-        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = result.head(1)
-    elif bank_name is not None and year_fixed is not None:
-        group = data.groupby('Bank_Name')
-        bank_programs = group.get_group(bank_name)
-        group = bank_programs.groupby('fixedInterval')
-        bank_programs = group.get_group(year_fixed)
-        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = result.head(1)
-    elif mortgage is not None and year_fixed is not None:
-        group = data.groupby('repaymentType')
-        bank_programs = group.get_group(mortgage)
-        group = bank_programs.groupby('fixedInterval')
-        bank_programs = group.get_group(year_fixed)
-        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = result.head(1)
-    elif bank_name is not None:
-        group = data.groupby('Bank_Name')
-        bank_programs = group.get_group(bank_name)
-        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = result.head(1)
-    elif mortgage is not None:
-        group = data.groupby('repaymentType')
-        bank_programs = group.get_group(mortgage)
-        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = result.head(1)
-    elif year_fixed is not None:
-        group = data.groupby('fixedInterval')
-        bank_programs = group.get_group(year_fixed)
-        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = result.head(1)
-    else:
-        result = data.sort_values(by=['interestRate'], ascending=True)
-        top_lowest = result.head(1)
+    params = {
+        "Bank_Name": bank_name,
+        "repaymentType": mortgage,
+        "fixedInterval": year_fixed
+    }
 
-    return top_lowest
+    return get_lowest_rate_group_by(data, params)
 
 
 # Example:
@@ -160,3 +132,4 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
 #get_lowest_bank('CommBank (CM)')
 
 print(get_best_rate('CommBank', 'IO', 1))
+
