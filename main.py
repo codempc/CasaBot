@@ -98,40 +98,6 @@ def description(req):
 def get_parameters(req):
     return req['queryResult']['parameters']
 
-
-def show_rate(req):
-    # Parsing the POST request body into a dictionary for easy access.
-    intent_name = req['queryResult']['intent']['displayName']
-    parameters = get_parameters(req)
-    print('Dialogflow Parameters:')
-    print(json.dumps(parameters, indent=4))
-    print("intent name:", intent_name)
-
-    # if the name of the bank is not given, then tell
-    # them that they need to include the name of the bank.
-
-    # TODO: CHECK LOAN AMOUNT AND LOAN YEAR SHOULD BE NEARING THE END TO CHECK IF THE AMOUNT AND PERIOD IS VALID. #####
-
-    # Accessing the fields on the POST request body of API.ai invocation of the webhook
-    # loan_amount = parameters["loan_value"]
-    # loan_year_period = parameters["loan_year_period"]
-    bank_name = parameters['Australian_Banks']
-    repayment_type = parameters['repayment_type']
-
-    if bank_name == "" and repayment_type == "":
-        response = random.choice(NO_INPUT)
-    elif bank_name == "":
-        response = random.choice(NO_BANK)
-    elif repayment_type == "":
-        output_string = random.choice(ONLY_BANK)
-        response = output_string.format(
-            bank_name=bank_name
-        )
-    else:
-        response = get_show_rate(bank_name, repayment_type)
-    return response
-
-
 def compare_rate(req):
     # TODO: Get the request and show right response.
     response = "The comparison ..."
@@ -190,13 +156,13 @@ def rate_followup(req):
     parameters = get_parameters(req)
     bank_name = ""
     repayment_type = ""
-    year_fixed = ""
+    fixed_year = ""
     if parameters["Australian_Banks"] != "":
         bank_name = parameters["Australian_Banks"]
     if parameters["repayment_type"] != "":
         repayment_type = parameters["repayment_type"]
-    if parameters["year_fixed"] != "":
-        year_fixed = parameters["year_fixed"]
+    if parameters["fixed_year"] != "":
+        year_fixed = parameters["fixed_year"]
 
     best_rate = get_best_rate(bank_name, repayment_type, year_fixed)
     response = random_response_best_bank(BEST_RATE_RESPONSE_ALL_INPUT, best_rate)
