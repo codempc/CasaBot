@@ -20,7 +20,7 @@ import os
 import random
 
 from flask import Flask, request, make_response, jsonify
-from GoogleSheet.read import get_show_rate, get_best_rate
+from GoogleSheet.read import get_best_rate
 from show_rate_responses import (
     NO_INPUT,
     NO_BANK,
@@ -149,6 +149,12 @@ def best_rate(req):
     mortgage_param = parameters['Mortgage_types']
     fixed_year_param = parameters['fixed_year']
 
+    params = {
+        bank_param: parameters['Australian_Banks'],
+        mortgage_param: parameters['Mortgage_types'],
+        fixed_year_param: parameters['fixed_year']
+    }
+
     if bank_param == "" and mortgage_param == "" and fixed_year_param == "":
         best_rate = get_best_rate(bank_name, mortgage_type, year_fixed)
         response = random_response_best_bank(BEST_RATE_RESPONSE_NO_INPUT, best_rate)
@@ -184,13 +190,17 @@ def rate_followup(req):
     parameters = get_parameters(req)
     bank_name = ""
     repayment_type = ""
+    year_fixed = ""
     if parameters["Australian_Banks"] != "":
         bank_name = parameters["Australian_Banks"]
-
     if parameters["repayment_type"] != "":
         repayment_type = parameters["repayment_type"]
+    if parameters["year_fixed"] != "":
+        year_fixed = parameters["year_fixed"]
 
-    response = get_show_rate(bank_name, repayment_type)
+    best_rate = get_best_rate(bank_name, repayment_type, year_fixed)
+    response = random_response_best_bank(BEST_RATE_RESPONSE_ALL_INPUT, best_rate)
+
     return response
 
 
