@@ -54,19 +54,20 @@ def webhook():
         return 'json error'
 
     print('Intent: ' + intent)
-    if intent == 'showRate':
-        res = show_rate(req)
-    elif intent == 'description':
+    if intent == 'description':
         res = description(req)
     elif intent == 'compareRate':
         res = compare_rate(req)
     elif intent == 'bestRate':
-        res = best_rate(req)
+        res, outputContexts = best_rate(req)
+        r = make_response(res)
+        r.headers['Content-Type'] = 'application/json'
+        return make_response(jsonify({'fulfillmentText': res, 'outputContexts': [outputContexts]}))
     elif intent == 'rate-followup':
         res = rate_followup(req)
     else:
         # TODO: Fix the else statement for res with fallback intent?
-        res = show_rate(req)
+        res = best_rate(req)
 
     print(res)
     r = make_response(res)
@@ -149,7 +150,17 @@ def best_rate(req):
         best_rate = get_best_rate(bank_param, mortgage_param, fixed_year_param)
         response = random_response_best_bank(BEST_RATE_RESPONSE_ALL_INPUT, best_rate)
 
-    return response
+    outputContexts = {
+        "name": "projects/ron-anpelr/agent/sessions/e1dc138a-9f22-7941-80de-8998ede6221b/contexts/showrate-followup",
+        "lifespanCount": 5,
+        "parameters": {
+            "fixed_year": best_rate['year_fixed'],
+            "Australian_Banks": best_rate['bank_name'],
+            "repayment_type": best_rate['repayment_type']
+        }
+    }
+
+    return response, outputContexts
 
 
 def rate_followup(req):
