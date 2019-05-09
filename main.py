@@ -162,9 +162,9 @@ def rate_followup(req):
     if parameters["repayment_type"] != "":
         repayment_type = parameters["repayment_type"]
     if parameters["fixed_year"] != "":
-        year_fixed = parameters["fixed_year"]
+        fixed_year = parameters["fixed_year"]
 
-    best_rate = get_best_rate(bank_name, repayment_type, year_fixed)
+    best_rate = get_best_rate(bank_name, repayment_type, fixed_year)
     response = random_response_best_bank(BEST_RATE_RESPONSE_ALL_INPUT, best_rate)
 
     return response
