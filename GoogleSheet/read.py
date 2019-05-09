@@ -99,3 +99,11 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
 
 print(get_best_rate())
 
+params = {
+    'bank_name': "",
+    'mortgage_type': "",
+    'fixed_year': ''
+}
+
+print(params.values())
+print(all(param == "" for param in params.values()))
