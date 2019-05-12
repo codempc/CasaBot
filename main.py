@@ -34,7 +34,8 @@ from show_rate_responses import (
     BEST_RATE_RESPONSE_ALL_INPUT,
     BEST_RATE_RESPONSE_BANK_MORTGAGE,
     BEST_RATE_RESPONSE_BANK_FIXEDYEAR,
-    BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR
+    BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR,
+    COMPARE_RATE_RESPONSE_ALL_INPUT
 )
 
 from util import random_response_best_bank
@@ -102,14 +103,44 @@ def get_parameters(req):
 def compare_rate(req):
     # TODO: Get the request and show right response.
     response = "The comparison ..."
+    parameters = get_parameters(req)
+
+    params = {
+        "bank1": parameters['Australian_Banks'],
+        "bank2": parameters['Australian_Banks1'],
+        "mortgage": parameters['Mortgage_types'],
+        "year_fixed": parameters['year_fixed']
+    }
+
+    best_rate_bank1 = get_best_rate(params["bank1"] or None, params["mortgage"] or None, params["year_fixed"] or None)
+    best_rate_bank2 = get_best_rate(params["bank2"] or None, params["mortgage"] or None, params["year_fixed"] or None)
+
+    if (all(param != "" for param in params.values())):
+        output_string = random.choice(COMPARE_RATE_RESPONSE_ALL_INPUT)
+        if (best_rate_bank1['interest_rate'] > best_rate_bank2['interest_rate']):
+            response = output_string.format(
+                bank_1=best_rate_bank1['bank_name'],
+                bank_2=best_rate_bank2['bank_name'],
+                repayment_type=params['mortgage'],
+                year_fixed=params['year_fixed'],
+                rate_1=best_rate_bank1['interest_rate'],
+                rate_2=best_rate_bank2['interest_rate'],
+                diff_rate=round(best_rate_bank1['interest_rate'] - best_rate_bank2['interest_rate'], 2)
+            )
+        else:
+            response = output_string.format(
+                bank_1=best_rate_bank2['bank_name'],
+                bank_2=best_rate_bank1['bank_name'],
+                repayment_type=params['mortgage'],
+                year_fixed=params['year_fixed'],
+                rate_1=best_rate_bank2['interest_rate'],
+                rate_2=best_rate_bank1['interest_rate'],
+                diff_rate=round(best_rate_bank2['interest_rate'] - best_rate_bank1['interest_rate'], 2)
+            )
     return response
 
 
 def best_rate(req):
-    bank_name = None
-    mortgage_type = None
-    year_fixed = None
-
     parameters = get_parameters(req)
 
     bank_param = parameters['Australian_Banks']
@@ -117,38 +148,35 @@ def best_rate(req):
     fixed_year_param = parameters['fixed_year']
 
     params = {
-        bank_param: parameters['Australian_Banks'],
-        mortgage_param: parameters['Mortgage_types'],
-        fixed_year_param: parameters['fixed_year']
+        "bank_param": parameters['Australian_Banks'],
+        "mortgage_param": parameters['Mortgage_types'],
+        "fixed_year_param": parameters['fixed_year']
     }
 
-    if bank_param == "" and mortgage_param == "" and fixed_year_param == "":
-        best_rate = get_best_rate(bank_name, mortgage_type, year_fixed)
-        response = random_response_best_bank(BEST_RATE_RESPONSE_NO_INPUT, best_rate)
-    elif bank_param != "" and mortgage_param != "" and fixed_year_param != "":
-        best_rate = get_best_rate(bank_param, mortgage_param, fixed_year_param)
-        response = random_response_best_bank(BEST_RATE_RESPONSE_ALL_INPUT, best_rate)
+    best_rate = get_best_rate(bank_param or None, mortgage_param or None, fixed_year_param or None)
+
+    response_text = None
+
+    if (all(param == "" for param in params.values())):
+        response_text = BEST_RATE_RESPONSE_NO_INPUT
+    elif (all(param != "" for param in params.values())):
+        response_text = BEST_RATE_RESPONSE_ALL_INPUT
     elif bank_param != "" and mortgage_param != "":
-        best_rate = get_best_rate(bank_param, mortgage_param, year_fixed)
-        response = random_response_best_bank(BEST_RATE_RESPONSE_BANK_MORTGAGE, best_rate)
+        response_text =  BEST_RATE_RESPONSE_BANK_MORTGAGE
     elif bank_param != "" and fixed_year_param != "":
-        best_rate = get_best_rate(bank_param, mortgage_type, fixed_year_param)
-        response = random_response_best_bank(BEST_RATE_RESPONSE_BANK_FIXEDYEAR, best_rate)
+        response_text = BEST_RATE_RESPONSE_BANK_FIXEDYEAR
     elif mortgage_param != "" and fixed_year_param != "":
-        best_rate = get_best_rate(bank_name, mortgage_param, fixed_year_param)
-        response = random_response_best_bank(BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR, best_rate)
+        response_text = BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR
     elif bank_param != "":
-        best_rate = get_best_rate(bank_param, mortgage_type, year_fixed)
-        response = random_response_best_bank(BEST_RATE_RESPONSE_ONLY_BANK, best_rate)
+        response_text = BEST_RATE_RESPONSE_ONLY_BANK
     elif mortgage_param != "":
-        best_rate = get_best_rate(bank_name, mortgage_param, year_fixed)
-        response = random_response_best_bank(BEST_RATE_RESPONSE_ONLY_REPAYMENT, best_rate)
+        response_text = BEST_RATE_RESPONSE_ONLY_REPAYMENT
     elif fixed_year_param != "":
-        best_rate = get_best_rate(bank_name, mortgage_type, fixed_year_param)
-        response = random_response_best_bank(BEST_RATE_RESPONSE_ONLY_FIXEDYEAR, best_rate)
+        response_text = BEST_RATE_RESPONSE_ONLY_FIXEDYEAR
     else:
-        best_rate = get_best_rate(bank_param, mortgage_param, fixed_year_param)
-        response = random_response_best_bank(BEST_RATE_RESPONSE_ALL_INPUT, best_rate)
+        response_text = BEST_RATE_RESPONSE_NO_INPUT
+    
+    response = random_response_best_bank(response_text, best_rate)
 
     outputContexts = {
         "name": "projects/ron-anpelr/agent/sessions/e1dc138a-9f22-7941-80de-8998ede6221b/contexts/showrate-followup",
