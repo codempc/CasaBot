@@ -40,7 +40,7 @@ from show_rate_responses import (
 
 from util import random_response_best_bank
 
-# Flask app should start in global layout
+# Start Flask.
 app = Flask(__name__)
 log = app.logger
 
