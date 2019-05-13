@@ -37,8 +37,16 @@ from show_rate_responses import (
     BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR,
     COMPARE_RATE_RESPONSE_ALL_INPUT
 )
-
-from util import random_response_best_bank
+from description_responses import (
+    DESC_IO,
+    DESC_LVR,
+    DESC_PI,
+    NOT_UNDERSTAND
+)
+from util import (
+    random_response_best_bank,
+    random_response_description
+)
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -81,19 +89,13 @@ def description(req):
 
     mortgage_type = parameters["Mortgage_types"]
     if mortgage_type == "IO":
-        response = mortgage_type + " or Interest Only loan is a loan in which " \
-                                   "the borrower pays only the interest for some or all of the " \
-                                   "term, with the principal balance unchanged during the interest-only period."
+        response = random_response_description(DESC_IO, mortgage_type)
     elif mortgage_type == "P&I":
-        response = mortgage_type + " or Principal and Interest loan is a loan in which " \
-                                   "the borrower pays the portioon of principal with " \
-                                   "the interest in a certain period of time."
+        response = random_response_description(DESC_PI, mortgage_type)
     elif mortgage_type == "LVR":
-        response = mortgage_type + " or Loan to Value Ratio is calculated by dividing the loan amount " \
-                                   "by the actual purchase price or valuation of the property, then" \
-                                   " multiplying it by 100."
+        response = random_response_description(DESC_LVR, mortgage_type)
     else:
-        response = "Sorry, I do not understand what you mean."
+        response = random_response_description(NOT_UNDERSTAND)
     return response
 
 
