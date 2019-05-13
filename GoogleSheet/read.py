@@ -29,7 +29,7 @@ def get_best_rate(bank_name=None, mortgage_types=None, year_fixed=None):
         "bank_name": bank,
         "repayment_type": repayment_type,
         "year_fixed":year_fixed,
-        "interest_rate":round(interest,2)
+        "interest_rate": round(interest,2)
     }
     
     return details
@@ -95,6 +95,6 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
 # get_lowest_bank(bank_name='CommBank (CM)',
 #                 mortgage='IO', yearFixed=1)
 
-#get_lowest_bank('CommBank (CM)')
+# get_lowest_bank('CommBank (CM)')
 
 # print(get_best_rate())
