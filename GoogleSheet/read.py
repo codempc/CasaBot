@@ -4,6 +4,7 @@ import pprint
 import json
 import random
 import os
+import time
 from oauth2client.service_account import ServiceAccountCredentials
 from tabulate import tabulate
 import pandas as pd
@@ -13,6 +14,7 @@ scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name(dir_path + '/bank_secret.json', scope)
 client = gspread.authorize(creds)
+
 
 def get_best_rate(bank_name=None, mortgage_types=None, year_fixed=None):
     # TODO: Get the list of arrays from the get_lowest_bank function from GoogleSheets.
@@ -28,10 +30,10 @@ def get_best_rate(bank_name=None, mortgage_types=None, year_fixed=None):
     details = {
         "bank_name": bank,
         "repayment_type": repayment_type,
-        "year_fixed":year_fixed,
-        "interest_rate": round(interest,2)
+        "year_fixed": year_fixed,
+        "interest_rate": round(interest, 2)
     }
-    
+
     return details
 
     # content = "The rate from " + bank + " with " + mortgage + " mortgage type and " \
@@ -71,7 +73,7 @@ def get_lowest_rate_group_by(data, params):
             else:
                 group = bank_programs.groupby(key)
                 bank_programs = group.get_group(value)
-    
+
     if bank_programs is not None:
         result = bank_programs.sort_values(by=['interestRate'], ascending=True)
     else:
@@ -80,7 +82,11 @@ def get_lowest_rate_group_by(data, params):
 
 
 def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
+    # start = time.time()
     sheet = client.open('casa_bank').sheet1
+    # end = time.time()
+    # print("lowest", end - start)
+
     data = pd.DataFrame(sheet.get_all_records())
     params = {
         "Bank_Name": bank_name,
@@ -90,11 +96,12 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
 
     return get_lowest_rate_group_by(data, params)
 
-
 # Example:
 # get_lowest_bank(bank_name='CommBank (CM)',
 #                 mortgage='IO', yearFixed=1)
 
 # get_lowest_bank('CommBank (CM)')
-
+# start = time.time()
 # print(get_best_rate())
+# end = time.time()
+# print(end - start)

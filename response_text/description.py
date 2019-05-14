@@ -3,7 +3,8 @@ DESC_IO = [
     'pays only the interest for some or all of the term, with the principal balance '
     'unchanged during the interest-only period. There is also another mortgage type which '
     'is P&I (Ask me for details!).',
-    'So {mortgage_type} or Interest Only is loan in which the borrower pays only the interest with the principal balance unchanged. '
+    'So {mortgage_type} or Interest Only is loan in which the borrower pays '
+    'only the interest with the principal balance unchanged. '
     'Ask me for another mortgage type (P&I) description!'
 ]
 
@@ -11,7 +12,8 @@ DESC_PI = [
     '{mortgage_type} or Principal and Interest loan is a loan in which '
     'the borrower pays the portion of principal with '
     ' the interest in a certain period of time. There is also another mortgage type which is IO (Ask me for details!)',
-    'So {mortgage_type} or Principal and Interest is a loan in which the borrower pays the portion of principal including the interest '
+    'So {mortgage_type} or Principal and Interest is a loan in which the borrower pays the '
+    'portion of principal including the interest '
     'Ask me for another mortgage type (IO) description!'
 ]
 
