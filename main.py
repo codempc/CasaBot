@@ -47,7 +47,7 @@ def webhook():
         res, output_contexts = best_rate(req)
         r = make_response(res)
         r.headers['Content-Type'] = 'application/json'
-        return make_response(jsonify({'fulfillmentText': res, 'outputContexts': [output_contexts]}))
+        return make_response(jsonify({'fulfillmentText': res, 'outputContexts': output_contexts}))
     elif intent == 'rate-followup':
         res = rate_followup(req)
     elif intent == 'bestRate - followup':
@@ -64,6 +64,7 @@ def webhook():
 
 def get_parameters(req):
     return req['queryResult']['parameters']
+
 
 def get_contexts(req, pos):
     return req['queryResult']['outputContexts'][pos]
@@ -119,21 +120,32 @@ def best_rate(req):
 
     response = Random.best_bank(params, best_rate)
 
-
-    ## TODO: Static Output Contexts, there should be a better way of doing it.
-    output_contexts = {
+    # TODO: Static Output Contexts, there should be a better way of doing it.
+    output_contexts = [{
+        "name": "projects/ron-anpelr/agent/sessions/e1dc138a-9f22-7941-80de-8998ede6221b/contexts/showrate-followup",
+        "lifespanCount": 5,
+        "parameters": {
+            "fixed_year": best_rate['year_fixed'],
+            "Australian_Banks": best_rate['bank_name'],
+            "repayment_type": best_rate['repayment_type'],
+            "rate": best_rate['interest_rate']
+        }
+    },
+        {
         "name": "projects/ron-anpelr/agent/sessions/e1dc138a-9f22-7941-80de-8998ede6221b/contexts/bestrate-followup",
         "lifespanCount": 5,
         "parameters": {
             "rate": best_rate['interest_rate']
         }
     }
+    ]
 
     return response, output_contexts
 
+
 def compare_followup(req):
     parameters = get_parameters(req)
-    
+
     params = {
         "bank": parameters['Australian_Banks'],
         "mortgage": parameters['Mortgage_types'],
@@ -150,22 +162,17 @@ def compare_followup(req):
     return response
 
 
-
 def rate_followup(req):
     parameters = get_parameters(req)
-    bank_name = ""
-    repayment_type = ""
-    fixed_year = ""
-    if parameters["Australian_Banks"] != "":
-        bank_name = parameters["Australian_Banks"]
-    if parameters["repayment_type"] != "":
-        repayment_type = parameters["repayment_type"]
-    if parameters["fixed_year"] != "":
-        fixed_year = parameters["fixed_year"]
-
-    best_rate = get_best_rate(bank_name, repayment_type, fixed_year)
+    params = {
+        "bank": parameters['Australian_Banks'],
+        "mortgage": parameters['Mortgage_types'],
+        "fixed_year": parameters['year_fixed']
+    }
+    best_rate = get_best_rate(
+        params['bank'] or None, params['mortgage'] or None, params['fixed_year'] or None)
     response = Random.best_bank(
-        parameters, best_rate)
+        params, best_rate)
 
     return response
 
