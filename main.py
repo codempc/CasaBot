@@ -122,14 +122,6 @@ def best_rate(req):
 
     ## TODO: Static Output Contexts, there should be a better way of doing it.
     output_contexts = {
-        "name": "projects/ron-anpelr/agent/sessions/e1dc138a-9f22-7941-80de-8998ede6221b/contexts/showrate-followup",
-        "lifespanCount": 5,
-        "parameters": {
-            "fixed_year": best_rate['year_fixed'],
-            "Australian_Banks": best_rate['bank_name'],
-            "repayment_type": best_rate['repayment_type'],
-            "rate": best_rate['interest_rate']
-        },
         "name": "projects/ron-anpelr/agent/sessions/e1dc138a-9f22-7941-80de-8998ede6221b/contexts/bestrate-followup",
         "lifespanCount": 5,
         "parameters": {
@@ -148,7 +140,7 @@ def compare_followup(req):
         "fixed_year": parameters['year_fixed']
     }
 
-    context = get_contexts(req, 1)
+    context = get_contexts(req, pos=1)
     old_rate = context['parameters']['rate']
 
     new_best_rate = get_best_rate(
