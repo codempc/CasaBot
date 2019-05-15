@@ -83,7 +83,7 @@ def get_lowest_rate_group_by(data, params):
 
 def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
     # start = time.time()
-    sheet = client.open('casa_bank').sheet1
+    sheet = client.open('static_home_loan').sheet1
     # end = time.time()
     # print("lowest", end - start)
 
@@ -105,3 +105,4 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
 # print(get_best_rate())
 # end = time.time()
 # print(end - start)
+

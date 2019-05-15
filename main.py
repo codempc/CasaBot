@@ -50,6 +50,8 @@ def webhook():
         return make_response(jsonify({'fulfillmentText': res, 'outputContexts': [output_contexts]}))
     elif intent == 'rate-followup':
         res = rate_followup(req)
+    elif intent == 'bestRate - followup':
+        res = compare_followup(req)
     else:
         # TODO: Fix the else statement for res with fallback intent?
         res = best_rate(req)
@@ -124,11 +126,24 @@ def best_rate(req):
         "parameters": {
             "fixed_year": best_rate['year_fixed'],
             "Australian_Banks": best_rate['bank_name'],
-            "repayment_type": best_rate['repayment_type']
+            "repayment_type": best_rate['repayment_type'],
+            "rate": best_rate['interest_rate']
         }
     }
 
     return response, output_contexts
+
+def compare_followup(req):
+    parameters = get_parameters(req)
+    
+    params = {
+        "bank": parameters['Australian_Banks'],
+        "mortgage": parameters['Mortgage_types'],
+        "fixed_year": parameters['year_fixed']
+    }
+
+    print(params['rate'])
+
 
 
 def rate_followup(req):
