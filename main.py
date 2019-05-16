@@ -20,9 +20,6 @@ import time
 from flask import Flask, request, make_response, jsonify
 from GoogleSheet.read import get_best_rate
 from Random import Random
-from response_text.compare_rate import (
-    COMPARE_RATE_RESPONSE_ALL_INPUT
-)
 
 # Start Flask.
 app = Flask(__name__)
@@ -79,8 +76,6 @@ def description(req):
 
 
 def compare_rate(req):
-    # TODO: Get the request and show right response.
-    response = "The comparison ..."
     parameters = get_parameters(req)
 
     params = {
@@ -90,19 +85,14 @@ def compare_rate(req):
         "year_fixed": parameters['year_fixed']
     }
 
+    # TODO: Check if bank1 and bank2 are the same. if the same bank, tell user that he/she put in the same name of bank.
     best_rate_bank1 = get_best_rate(
         params["bank1"] or None, params["mortgage"] or None, params["year_fixed"] or None)
     best_rate_bank2 = get_best_rate(
-        params["bank2"] or None, params["mortgage"] or None, params["year_fixed"] or None)
+        params["bank2"] or None, params["mortgage"] or
+        best_rate_bank1['repayment_type'], params["year_fixed"] or best_rate_bank1['year_fixed'])
 
-    if (all(param != "" for param in params.values())):
-        response_type = COMPARE_RATE_RESPONSE_ALL_INPUT
-    else:
-        response_type = COMPARE_RATE_RESPONSE_ALL_INPUT
-
-    print(best_rate_bank1)
-    response = Random.compare_bank(
-        response_type, best_rate_bank1, best_rate_bank2)
+    response = Random.compare_bank(best_rate_bank1, best_rate_bank2)
     return response
 
 
@@ -132,12 +122,12 @@ def best_rate(req):
         }
     },
         {
-        "name": "projects/ron-anpelr/agent/sessions/e1dc138a-9f22-7941-80de-8998ede6221b/contexts/bestrate-followup",
-        "lifespanCount": 5,
-        "parameters": {
-            "rate": best_rate['interest_rate']
+            "name": "projects/ron-anpelr/agent/sessions/e1dc138a-9f22-7941-80de-8998ede6221b/contexts/bestrate-followup",
+            "lifespanCount": 5,
+            "parameters": {
+                "rate": best_rate['interest_rate']
+            }
         }
-    }
     ]
 
     return response, output_contexts

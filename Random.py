@@ -88,11 +88,12 @@ class Random:
 
         return response
 
-    ## TODO: Compare Bank more response.
+    # TODO: Compare Bank more response.
     @staticmethod
-    def compare_bank(response_type, bank_1_details, bank_2_details):
-        output_string = random.choice(response_type)
-        if (bank_1_details['interest_rate'] > bank_2_details['interest_rate']):
+    def compare_bank(bank_1_details, bank_2_details):
+        output_string = random.choice(COMPARE_RATE_RESPONSE_ALL_INPUT)
+        # If interest_rate from bank 1 is higher
+        if bank_1_details['interest_rate'] < bank_2_details['interest_rate']:
             response = output_string.format(
                 bank_1=bank_1_details['bank_name'],
                 bank_2=bank_2_details['bank_name'],
@@ -121,26 +122,24 @@ class Random:
         else:
             response_text = BEST_COMPARE_FOLLOWUP_WORST
         return response_text
-    
+
     @staticmethod
     def best_rate_compare_followup(old_rate, best_rate):
         response_text = Random.get_best_rate_compare_followup_resp(old_rate, best_rate)
         output_string = random.choice(response_text)
-        if (old_rate > best_rate['interest_rate']):
+        if old_rate > best_rate['interest_rate']:
             response = output_string.format(
-                bank_name = best_rate['bank_name'],
-                old_rate = old_rate,
-                new_rate = best_rate['interest_rate'],
-                diff_rate = round(old_rate - best_rate['interest_rate'], 2)
+                bank_name=best_rate['bank_name'],
+                old_rate=old_rate,
+                new_rate=best_rate['interest_rate'],
+                diff_rate=round(old_rate - best_rate['interest_rate'], 2)
             )
         else:
             response = output_string.format(
-                bank_name = best_rate['bank_name'],
-                old_rate = old_rate,
-                new_rate = best_rate['interest_rate'],
-                diff_rate = round(best_rate['interest_rate'] - old_rate, 2)
+                bank_name=best_rate['bank_name'],
+                old_rate=old_rate,
+                new_rate=best_rate['interest_rate'],
+                diff_rate=round(best_rate['interest_rate'] - old_rate, 2)
             )
 
         return response
-
-
