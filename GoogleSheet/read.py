@@ -16,22 +16,24 @@ creds = ServiceAccountCredentials.from_json_keyfile_name(dir_path + '/bank_secre
 client = gspread.authorize(creds)
 
 
-def get_best_rate(bank_name=None, mortgage_types=None, year_fixed=None):
+def get_best_rate(bank_name=None, mortgage_types=None, year_fixed=None, ownership_status=None):
     # TODO: Get the list of arrays from the get_lowest_bank function from GoogleSheets.
     # TODO: Format data for the result should be in array like below
     #  (although in the real situation we should show more columns).
 
-    result = get_lowest_bank(bank_name, mortgage_types, year_fixed)
+    result = get_lowest_bank(bank_name, mortgage_types, year_fixed, ownership_status)
 
-    bank = result['Bank_Name'].item()
-    repayment_type = result['repaymentType'].item()
-    year_fixed = result['fixedInterval'].item()
-    interest = result['interestRate'].item()
+    bank = result['Bank_name'].item()
+    repayment_type = result['Repayment_type'].item()
+    year_fixed = result['Fixed_year'].item()
+    interest = result['Interest_rate'].item()
+    ownership = result['Ownership_status'].item()
     details = {
         "bank_name": bank,
         "repayment_type": repayment_type,
         "year_fixed": year_fixed,
-        "interest_rate": round(interest, 2)
+        "ownership": ownership_status,
+        "interest_rate": interest
     }
 
     return details
@@ -75,23 +77,24 @@ def get_lowest_rate_group_by(data, params):
                 bank_programs = group.get_group(value)
 
     if bank_programs is not None:
-        result = bank_programs.sort_values(by=['interestRate'], ascending=True)
+        result = bank_programs.sort_values(by=['Interest_rate'], ascending=True)
     else:
-        result = data.sort_values(by=['interestRate'], ascending=True)
+        result = data.sort_values(by=['Interest_rate'], ascending=True)
     return result.head(1)
 
 
-def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
+def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None, ownership_status=None):
     # start = time.time()
-    sheet = client.open('static_home_loan').sheet1
+    sheet = client.open('casa_bank').sheet1
     # end = time.time()
     # print("lowest", end - start)
 
     data = pd.DataFrame(sheet.get_all_records())
     params = {
-        "Bank_Name": bank_name,
-        "repaymentType": mortgage,
-        "fixedInterval": year_fixed
+        "Bank_name": bank_name,
+        "Repayment_type": mortgage,
+        "Fixed_year": year_fixed,
+        "Ownership_status": ownership_status
     }
 
     return get_lowest_rate_group_by(data, params)
@@ -105,4 +108,4 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None):
 # print(get_best_rate())
 # end = time.time()
 # print(end - start)
-
+#print(get_best_rate('CommBank'))
