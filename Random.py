@@ -101,7 +101,7 @@ class Random:
                 year_fixed=bank_1_details['year_fixed'],
                 rate_1=bank_1_details['interest_rate'],
                 rate_2=bank_2_details['interest_rate'],
-                diff_rate=round(bank_1_details['interest_rate'] - bank_2_details['interest_rate'], 2)
+                diff_rate=abs(round(bank_1_details['interest_rate'] - bank_2_details['interest_rate'], 2))
             )
         else:
             response = output_string.format(
@@ -111,7 +111,7 @@ class Random:
                 year_fixed=bank_2_details['year_fixed'],
                 rate_1=bank_2_details['interest_rate'],
                 rate_2=bank_1_details['interest_rate'],
-                diff_rate=round(bank_2_details['interest_rate'] - bank_1_details['interest_rate'], 2)
+                diff_rate=abs(round(bank_2_details['interest_rate'] - bank_1_details['interest_rate'], 2))
             )
         return response
 
@@ -132,14 +132,14 @@ class Random:
                 bank_name=best_rate['bank_name'],
                 old_rate=old_rate,
                 new_rate=best_rate['interest_rate'],
-                diff_rate=round(old_rate - best_rate['interest_rate'], 2)
+                diff_rate=abs(round(old_rate - best_rate['interest_rate'], 2))
             )
         else:
             response = output_string.format(
                 bank_name=best_rate['bank_name'],
                 old_rate=old_rate,
                 new_rate=best_rate['interest_rate'],
-                diff_rate=round(best_rate['interest_rate'] - old_rate, 2)
+                diff_rate=abs(round(best_rate['interest_rate'] - old_rate, 2))
             )
 
         return response

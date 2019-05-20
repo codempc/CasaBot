@@ -104,8 +104,8 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None, ownership_st
 #                 mortgage='IO', yearFixed=1)
 
 # get_lowest_bank('CommBank (CM)')
-start = time.time()
-print(get_best_rate('CommBank', 'IO', 3, 'OO'))
-end = time.time()
-print(end - start)
-#print(get_best_rate('CommBank'))
+# start = time.time()
+# print(get_best_rate('CommBank', 'IO', 3, 'OO'))
+# end = time.time()
+# print(end - start)
+# #print(get_best_rate('CommBank'))
