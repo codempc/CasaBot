@@ -102,11 +102,13 @@ def best_rate(req):
     params = {
         "bank": parameters['Australian_Banks'],
         "mortgage": parameters['Mortgage_types'],
-        "fixed_year": parameters['year_fixed']
+        "fixed_year": parameters['year_fixed'],
+        "ownership_status": parameters['ownership_status']
     }
 
     best_rate = get_best_rate(
-        params['bank'] or None, params['mortgage'] or None, params['fixed_year'] or None)
+        params['bank'] or None, params['mortgage'] or None,
+        params['fixed_year'] or None, params['ownership_status'] or None)
 
     response = Random.best_bank(params, best_rate)
 

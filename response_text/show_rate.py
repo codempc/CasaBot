@@ -30,10 +30,11 @@
 
 BEST_RATE_RESPONSE_NO_INPUT = [
     'At the market, the lowest rate at the moment for home loan is {interest_rate}%. '
-    'This rate is exclusively offered by'
+    ' This rate is exclusively offered by'
     ' {bank_name}, with a repayment type of {repayment_type}, and year fixed rate of {year_fixed} years',
     'The lowest rate currently offered by the top banks in Australia is {interest_rate}%. You can get this lowest rate'
-    ' if you apply the home loan program with {bank_name}. This program includes a repayment type of {repayment_type}'
+    ' if you apply the home loan program with {bank_name} This program is intended for {ownership_status} '
+    ' includes a repayment type of {repayment_type}'
     ' and the rate is fixed for {year_fixed} years.'
 ]
 
@@ -56,6 +57,14 @@ BEST_RATE_RESPONSE_ONLY_FIXEDYEAR = [
     'For a rate that is fixed for {year_fixed} years, the best rate '
     'currently available is {interest_rate}%, offered by {bank_name}.',
     'Great! The best rate for a {year_fixed} year fixed program'
+    ' available at the moment is {interest_rate}%. You can apply this via {bank_name}.'
+    ' Also, by the way, this is for repayment type of {repayment_type}'
+]
+
+BEST_RATE_RESPONSE_ONLY_OWNERSHIPSTATUS = [
+    ' The best rate for {ownership_status}'
+    ' currently available is {interest_rate}%, offered by {bank_name}.',
+    ' If you intend to be {ownership_status}, the most suitable rate '
     ' available at the moment is {interest_rate}%. You can apply this via {bank_name}.'
     ' Also, by the way, this is for repayment type of {repayment_type}'
 ]
