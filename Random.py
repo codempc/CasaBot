@@ -8,6 +8,7 @@ from response_text.show_rate import (
     BEST_RATE_RESPONSE_BANK_MORTGAGE,
     BEST_RATE_RESPONSE_BANK_FIXEDYEAR,
     BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR,
+    BEST_RATE_RESPONSE_ONLY_OWNERSHIPSTATUS
 )
 
 from response_text.compare_rate import (
@@ -47,6 +48,8 @@ class Random:
             response_text = BEST_RATE_RESPONSE_ONLY_REPAYMENT
         elif params['fixed_year'] != "":
             response_text = BEST_RATE_RESPONSE_ONLY_FIXEDYEAR
+        elif params['ownership_status'] != "":
+            response_text = BEST_RATE_RESPONSE_ONLY_OWNERSHIPSTATUS
         else:
             response_text = BEST_RATE_RESPONSE_NO_INPUT
 
@@ -61,7 +64,8 @@ class Random:
             bank_name=details['bank_name'],
             interest_rate=details['interest_rate'],
             repayment_type=details['repayment_type'],
-            year_fixed=details['year_fixed']
+            year_fixed=details['year_fixed'],
+
         )
 
         return response
