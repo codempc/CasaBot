@@ -32,7 +32,7 @@ def get_best_rate(bank_name=None, mortgage_types=None, year_fixed=None, ownershi
         "bank_name": bank,
         "repayment_type": repayment_type,
         "year_fixed": year_fixed,
-        "ownership": ownership_status,
+        "ownership": ownership,
         "interest_rate": interest
     }
 
@@ -85,7 +85,7 @@ def get_lowest_rate_group_by(data, params):
 
 def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None, ownership_status=None):
     # start = time.time()
-    sheet = client.open('casa_bank').sheet1
+    sheet = client.open('Bank_Chatbot_Data').sheet1
     # end = time.time()
     # print("lowest", end - start)
 
@@ -104,8 +104,8 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None, ownership_st
 #                 mortgage='IO', yearFixed=1)
 
 # get_lowest_bank('CommBank (CM)')
-# start = time.time()
-# print(get_best_rate())
-# end = time.time()
-# print(end - start)
+start = time.time()
+print(get_best_rate('CommBank', 'IO', 3, 'OO'))
+end = time.time()
+print(end - start)
 #print(get_best_rate('CommBank'))
