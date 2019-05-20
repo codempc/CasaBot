@@ -15,36 +15,8 @@ scope = ['https://spreadsheets.google.com/feeds',
 creds = ServiceAccountCredentials.from_json_keyfile_name(dir_path + '/bank_secret.json', scope)
 client = gspread.authorize(creds)
 
-
-def get_best_rate(bank_name=None, mortgage_types=None, year_fixed=None, ownership_status=None):
-    # TODO: Get the list of arrays from the get_lowest_bank function from GoogleSheets.
-    # TODO: Format data for the result should be in array like below
-    #  (although in the real situation we should show more columns).
-
-    result = get_lowest_bank(bank_name, mortgage_types, year_fixed, ownership_status)
-
-    bank = result['Bank_name'].item()
-    repayment_type = result['Repayment_type'].item()
-    year_fixed = result['Fixed_year'].item()
-    interest = result['Interest_rate'].item()
-    ownership = result['Ownership_status'].item()
-    details = {
-        "bank_name": bank,
-        "repayment_type": repayment_type,
-        "year_fixed": year_fixed,
-        "ownership": ownership_status,
-        "interest_rate": interest
-    }
-
-    return details
-
-    # content = "The rate from " + bank + " with " + mortgage + " mortgage type and " \
-    #           + str(year) + " year(s) fixed rate is " + str(interest) + "%."
-    # return content
-
-
 def view_all_data(file_name):
-    sheet = client.open(file_name.lower()).sheet1
+    sheet = client.open(file_name).sheet1
     # TODO: Get 5 with the highest rate (no condition).
     # TODO: Get 5 with the highest rate for different bank
     # TODO: Get 5 with the highest rate for different mortgage types.
@@ -67,6 +39,7 @@ def view_all_data(file_name):
 def get_lowest_rate_group_by(data, params):
     group = None
     bank_programs = None
+
     for key, value in params.items():
         if value is not None:
             if group is None:
@@ -83,9 +56,9 @@ def get_lowest_rate_group_by(data, params):
     return result.head(1)
 
 
-def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None, ownership_status=None):
+def get_best_rate(bank_name=None, mortgage=None, year_fixed=None, ownership_status=None):
     # start = time.time()
-    sheet = client.open('casa_bank').sheet1
+    sheet = client.open('Bank_Chatbot_Data').sheet1
     # end = time.time()
     # print("lowest", end - start)
 
@@ -97,7 +70,25 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None, ownership_st
         "Ownership_status": ownership_status
     }
 
-    return get_lowest_rate_group_by(data, params)
+    best_rate = get_lowest_rate_group_by(data, params)
+
+    bank = best_rate['Bank_name'].item()
+    repayment_type = best_rate['Repayment_type'].item()
+    year_fixed = best_rate['Fixed_year'].item()
+    interest = best_rate['Interest_rate'].item()
+    ownership = best_rate['Ownership_status'].item()
+    
+    details = {
+        "bank_name": bank,
+        "repayment_type": repayment_type,
+        "year_fixed": year_fixed,
+        "ownership": ownership,
+        "interest_rate": interest
+    }
+
+    return details
+
+
 
 # Example:
 # get_lowest_bank(bank_name='CommBank (CM)',
@@ -105,7 +96,7 @@ def get_lowest_bank(bank_name=None, mortgage=None, year_fixed=None, ownership_st
 
 # get_lowest_bank('CommBank (CM)')
 # start = time.time()
-# print(get_best_rate())
+# print(get_best_rate('CommBank'))
 # end = time.time()
 # print(end - start)
-#print(get_best_rate('CommBank'))
+# #print(get_best_rate('CommBank'))
