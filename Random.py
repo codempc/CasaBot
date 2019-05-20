@@ -18,6 +18,8 @@ from response_text.description import (
     DESC_IO,
     DESC_LVR,
     DESC_PI,
+    DESC_OO,
+    DESC_I,
     NOT_UNDERSTAND
 )
 
@@ -67,23 +69,23 @@ class Random:
         return response
 
     @staticmethod
-    def get_resp_description(mortgage_type):
-        if mortgage_type is None:
+    def get_resp_description(abv_description):
+        if abv_description is None:
             return NOT_UNDERSTAND
 
         response_type = "DESC_"
-        response_type += mortgage_type
+        response_type += abv_description
         response_text = eval(response_type)
         print(response_text)
 
         return response_text
 
     @staticmethod
-    def description(mortgage_type=None):
-        response_type = Random.get_resp_description(mortgage_type)
+    def description(abv_description=None):
+        response_type = Random.get_resp_description(abv_description)
         output_string = random.choice(response_type)
         response = output_string.format(
-            mortgage_type=mortgage_type
+            abv_description=abv_description
         )
 
         return response

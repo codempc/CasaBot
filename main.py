@@ -70,8 +70,8 @@ def get_contexts(req, pos):
 def description(req):
     parameters = req['queryResult']['parameters']
 
-    mortgage_type = parameters["Mortgage_types"]
-    response = Random.description(mortgage_type)
+    abv_description = parameters["Abv_description"]
+    response = Random.description(abv_description)
     return response
 
 
