@@ -5,7 +5,6 @@ import json
 import random
 import os
 import time
-import memcache
 import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 from tabulate import tabulate
@@ -68,7 +67,10 @@ def open_sheet():
     #     sheet = mc.get('sheet')
 
     # return sheet
+    start = time.time()
     sheet = client.open('Bank_Chatbot_Data').sheet1
+    end = time.time()
+    print(end - start)
     return sheet
 
 def get_best_rate(bank_name=None, mortgage=None, year_fixed=None, ownership_status=None):
