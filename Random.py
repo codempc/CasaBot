@@ -33,6 +33,10 @@ from response_text.best_compare_rate_followup import (
     BEST_COMPARE_FOLLOWUP_WORST
 )
 
+from response_text.welcome import (
+    WELCOME_TEXT
+)
+
 
 class Random:
     @staticmethod
@@ -165,3 +169,12 @@ class Random:
 
         return response
 
+    @staticmethod
+    def welcome_response(timestamp):
+        output_string = random.choice(WELCOME_TEXT)
+
+        response = output_string.format(
+            timestamp=timestamp
+        )
+
+        return response

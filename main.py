@@ -18,7 +18,10 @@ import os
 import time
 
 from flask import Flask, request, make_response, jsonify
-from GoogleSheet.read import get_best_rate
+from GoogleSheet.read import (
+    get_best_rate,
+    get_last_updated
+)
 from Random import Random
 
 # Start Flask.
@@ -49,6 +52,8 @@ def webhook():
         res = rate_followup(req)
     elif intent == 'bestRate - followup':
         res = compare_followup(req)
+    elif intent == 'Default Welcome Intent':
+        res = welcome()
     else:
         # TODO: Fix the else statement for res with fallback intent?
         res = best_rate(req)
@@ -166,6 +171,12 @@ def rate_followup(req):
     response = Random.best_bank(
         params, best_rate)
 
+    return response
+
+def welcome():
+    timestamp_updated = get_last_updated()
+
+    response = Random.welcome_response(timestamp_updated)
     return response
 
 

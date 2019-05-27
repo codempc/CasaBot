@@ -105,6 +105,11 @@ def get_best_rate(bank_name=None, mortgage=None, year_fixed=None, ownership_stat
 
     return details
 
+def get_last_updated():
+    sheet = open_sheet()
+    
+    return sheet.acell('K2').value
+
 
 
 # Example:
@@ -117,4 +122,6 @@ def get_best_rate(bank_name=None, mortgage=None, year_fixed=None, ownership_stat
 # end = time.time()
 # print(end - start)
 # #print(get_best_rate('CommBank'))
+
+get_last_updated()
 
