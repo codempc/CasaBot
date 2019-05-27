@@ -5,9 +5,10 @@ import json
 import random
 import os
 import time
+import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 from tabulate import tabulate
-import pandas as pd
+from functools import lru_cache
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 scope = ['https://spreadsheets.google.com/feeds',
@@ -55,12 +56,28 @@ def get_lowest_rate_group_by(data, params):
         result = data.sort_values(by=['Interest_rate'], ascending=True)
     return result.head(1)
 
+def open_sheet():
+    
+    # mc = memcache.Client(['127.0.0.1:11211'], debug=0)
+    # print(type(mc.get('sheet')))
+    # if mc.get('sheet') is None:
+    #     sheet = client.open('Bank_Chatbot_Data').sheet1
+    #     mc.set('sheet', sheet)
+    # else:
+    #     sheet = mc.get('sheet')
+
+    # return sheet
+    start = time.time()
+    sheet = client.open('Bank_Chatbot_Data').sheet1
+    end = time.time()
+    print(end - start)
+    return sheet
 
 def get_best_rate(bank_name=None, mortgage=None, year_fixed=None, ownership_status=None):
-    sheet = client.open('Static').sheet1
-
-    if year_fixed is not None and year_fixed != "-":
-        year_fixed = int(year_fixed)
+    start = time.time()
+    sheet = open_sheet()
+    end = time.time()
+    print(end - start)
 
     data = pd.DataFrame(sheet.get_all_records())
     params = {
@@ -100,3 +117,4 @@ def get_best_rate(bank_name=None, mortgage=None, year_fixed=None, ownership_stat
 # end = time.time()
 # print(end - start)
 # #print(get_best_rate('CommBank'))
+
