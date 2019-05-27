@@ -19,6 +19,10 @@ from response_text.compare_rate import (
     COMPARE_RATE_RESPONSE_ALL_INPUT
 )
 
+from response_text.show_time import (
+   SHOW_TIME_TEXT
+)
+
 from response_text.description import (
     DESC_IO,
     DESC_LVR,
@@ -172,6 +176,16 @@ class Random:
     @staticmethod
     def welcome_response(timestamp):
         output_string = random.choice(WELCOME_TEXT)
+
+        response = output_string.format(
+            timestamp=timestamp
+        )
+
+        return response
+
+    @staticmethod
+    def show_time(timestamp):
+        output_string = random.choice(SHOW_TIME_TEXT)
 
         response = output_string.format(
             timestamp=timestamp
