@@ -123,5 +123,5 @@ def get_last_updated():
 # print(end - start)
 # #print(get_best_rate('CommBank'))
 
-get_last_updated()
+# get_last_updated()
 
