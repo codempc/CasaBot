@@ -57,7 +57,10 @@ def get_lowest_rate_group_by(data, params):
 
 
 def get_best_rate(bank_name=None, mortgage=None, year_fixed=None, ownership_status=None):
-    sheet = client.open('Bank_Chatbot_Data').sheet1
+    sheet = client.open('Static').sheet1
+
+    if year_fixed is not None and year_fixed != "-":
+        year_fixed = int(year_fixed)
 
     data = pd.DataFrame(sheet.get_all_records())
     params = {
@@ -92,8 +95,8 @@ def get_best_rate(bank_name=None, mortgage=None, year_fixed=None, ownership_stat
 #                 mortgage='IO', yearFixed=1)
 
 # get_lowest_bank('CommBank (CM)')
-start = time.time()
-print(get_best_rate('CommBank'))
-end = time.time()
-print(end - start)
+# start = time.time()
+# print(get_best_rate('CommBank'))
+# end = time.time()
+# print(end - start)
 # #print(get_best_rate('CommBank'))

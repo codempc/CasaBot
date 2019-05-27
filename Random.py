@@ -3,12 +3,16 @@ from response_text.show_rate import (
     BEST_RATE_RESPONSE_ONLY_BANK,
     BEST_RATE_RESPONSE_ONLY_REPAYMENT,
     BEST_RATE_RESPONSE_ONLY_FIXEDYEAR,
+    BEST_RATE_RESPONSE_ONLY_VARIABLE,
     BEST_RATE_RESPONSE_NO_INPUT,
     BEST_RATE_RESPONSE_ALL_INPUT,
     BEST_RATE_RESPONSE_BANK_MORTGAGE,
     BEST_RATE_RESPONSE_BANK_FIXEDYEAR,
+    BEST_RATE_RESPONSE_BANK_VARIABLE,
     BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR,
-    BEST_RATE_RESPONSE_ONLY_OWNERSHIPSTATUS
+    BEST_RATE_RESPONSE_MORTGAGE_VARIABLE,
+    BEST_RATE_RESPONSE_ONLY_OWNERSHIPSTATUS,
+    BEST_RATE_RESPONSE_ALL_INPUT_VARIABLE
 )
 
 from response_text.compare_rate import (
@@ -37,19 +41,31 @@ class Random:
         if all(param == "" for param in params.values()):
             response_text = BEST_RATE_RESPONSE_NO_INPUT
         elif all(param != "" for param in params.values()):
-            response_text = BEST_RATE_RESPONSE_ALL_INPUT
+            if params['fixed_year'] == "-":
+                response_text = BEST_RATE_RESPONSE_ALL_INPUT_VARIABLE
+            else:
+                response_text = BEST_RATE_RESPONSE_ALL_INPUT
         elif params['bank'] != "" and params['mortgage'] != "":
             response_text = BEST_RATE_RESPONSE_BANK_MORTGAGE
         elif params['bank'] != "" and params['fixed_year'] != "":
-            response_text = BEST_RATE_RESPONSE_BANK_FIXEDYEAR
+            if params['fixed_year'] == "-":
+                response_text = BEST_RATE_RESPONSE_BANK_VARIABLE
+            else:
+                response_text = BEST_RATE_RESPONSE_BANK_FIXEDYEAR
         elif params['mortgage'] != "" and params['fixed_year'] != "":
-            response_text = BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR
+            if params['fixed_year'] == "-":
+                response_text = BEST_RATE_RESPONSE_MORTGAGE_VARIABLE
+            else:
+                response_text = BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR
         elif params['bank'] != "":
             response_text = BEST_RATE_RESPONSE_ONLY_BANK
         elif params['mortgage'] != "":
             response_text = BEST_RATE_RESPONSE_ONLY_REPAYMENT
-        elif params['fixed_year'] != "":
-            response_text = BEST_RATE_RESPONSE_ONLY_FIXEDYEAR
+        elif params['fixed_year'] == "":
+            if params['fixed_year'] == "-":
+                response_text = BEST_RATE_RESPONSE_ONLY_VARIABLE
+            else:
+                response_text = BEST_RATE_RESPONSE_ONLY_FIXEDYEAR
         elif params['ownership_status'] != "":
             response_text = BEST_RATE_RESPONSE_ONLY_OWNERSHIPSTATUS
         else:
@@ -67,7 +83,6 @@ class Random:
             interest_rate=details['interest_rate'],
             repayment_type=details['repayment_type'],
             year_fixed=details['year_fixed'],
-
         )
 
         return response

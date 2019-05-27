@@ -61,6 +61,11 @@ BEST_RATE_RESPONSE_ONLY_FIXEDYEAR = [
     ' Also, by the way, this is for repayment type of {repayment_type}'
 ]
 
+BEST_RATE_RESPONSE_ONLY_VARIABLE = [
+    'For variable rate, the best rate is {interest_rate}% in {bank_name}.',
+    'The best interest rate for variable rate is {interest_rate} in {bank_name}'
+]
+
 BEST_RATE_RESPONSE_ONLY_OWNERSHIPSTATUS = [
     ' The best rate for {ownership_status}'
     ' currently available is {interest_rate}%, offered by {bank_name}.',
@@ -84,6 +89,12 @@ BEST_RATE_RESPONSE_BANK_FIXEDYEAR = [
     ' the lowest rate of {interest_rate}% if you apply for the {repayment_type} program',
 ]
 
+BEST_RATE_RESPONSE_BANK_VARIABLE = [
+    '{bank_name} has {interest_rate}% as the lowest interest for variable rate if you apply for {repayment_type} program.',
+    'The lowest interest for variable rate at {bank_name} is {interest_rate}% with {repayment_type} program.'
+
+]
+
 BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR = [
     '{bank_name} has the best rate of {interest_rate}% for a program with mortgage type:' 
     ' {repayment_type} and fixed rate of {year_fixed} years.',
@@ -91,9 +102,20 @@ BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR = [
     ' If you apply through {bank_name}, you can get the lowest rate of {interest_rate}%'
 ]
 
+BEST_RATE_RESPONSE_MORTGAGE_VARIABLE = [
+    '{bank_name} has the best rate of {interest_rate}% for a program with {repayment_type} as a '
+    'mortgage type and variable rate.',
+    '{interest_rate}% is the lowest interest rate for variable rate in {bank_name} for {repayment_type} program.'
+]
 BEST_RATE_RESPONSE_ALL_INPUT = [
     'The best rate for {bank_name} with a repayment type {repayment_type} '
     'and fixed year rate of {year_fixed} years is {interest_rate}%',
     'The best rate at the moment I can find: Bank Name: {bank_name}, '
-    'Repayment Type: {repayment_type} Fixed year rate of {year_fixed} years is {interest_rate}%'
+    'Repayment Type: {repayment_type}, Fixed year rate of {year_fixed} years is {interest_rate}%'
+]
+
+BEST_RATE_RESPONSE_ALL_INPUT_VARIABLE = [
+    'The best rate for {bank_name} with a repayment type {repayment_type} and for variable rate is {interest_rate}%',
+    'The best rate at the moment I can find: Bank Name: {bank_name}, '
+    'Repayment Type: {repayment_type}, and for variable rate is {interest_rate}%'
 ]
