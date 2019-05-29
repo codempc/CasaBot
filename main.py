@@ -55,6 +55,8 @@ def webhook():
         res = compare_followup(req)
     elif intent == 'Default Welcome Intent':
         res = welcome()
+    elif intent == 'show_time':
+        res = show_time()
     else:
         res = "Unexpected action"
         log.error('Unexpected action')
@@ -180,6 +182,11 @@ def welcome():
     response = Random.welcome_response(timestamp_updated)
     return response
 
+def show_time():
+    timestamp_updated = get_last_updated()
+
+    response = Random.show_time(timestamp_updated)
+    return response
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
