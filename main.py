@@ -18,6 +18,7 @@ import os
 import time
 
 from flask import Flask, request, make_response, jsonify
+from flask.logging import create_logger
 from GoogleSheet.read import (
     get_best_rate,
     get_last_updated
@@ -26,7 +27,7 @@ from Random import Random
 
 # Start Flask.
 app = Flask(__name__)
-log = app.logger
+log = create_logger(app)
 
 
 @app.route('/', methods=['POST'])
@@ -38,7 +39,7 @@ def webhook():
     except AttributeError:
         return 'json error'
 
-    print('Intent: ' + intent)
+    print('Intent name: ' + intent)
     if intent == 'description':
         res = description(req)
     elif intent == 'compareRate':
@@ -55,10 +56,9 @@ def webhook():
     elif intent == 'Default Welcome Intent':
         res = welcome()
     else:
-        # TODO: Fix the else statement for res with fallback intent?
-        res = best_rate(req)
+        res = "Unexpected action"
+        log.error('Unexpected action')
 
-    print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return make_response(jsonify({'fulfillmentText': res}))
@@ -90,7 +90,8 @@ def compare_rate(req):
         "year_fixed": parameters['year_fixed']
     }
 
-    # TODO: Check if bank1 and bank2 are the same. if the same bank, tell user that he/she put in the same name of bank.
+    # TODO: Check if bank1 and bank2 are the same. if the same bank, 
+    # tell user that he/she put in the same name of bank.
     best_rate_bank1 = get_best_rate(
         params["bank1"] or None, params["mortgage"] or None, params["year_fixed"] or None)
     best_rate_bank2 = get_best_rate(

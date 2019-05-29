@@ -10,7 +10,7 @@ WELCOME_TEXT = [
     '2. Compare home loan rate \n'
     'And give you more details!'
     ' Please note that our rate is last updated on {timestamp}.',
-    'Hello! You can get started with us by asking '
-    ' the best home loan rate value at the moment. '
+    'Hello! You can get started with us by asking'
+    ' the best home loan rate value at the moment.'
     ' Then, we can also compare this rate with other rate of your preference as needed!'
 ]
