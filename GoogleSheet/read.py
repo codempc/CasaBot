@@ -43,7 +43,7 @@ def get_lowest_rate_group_by(data, params):
     bank_programs = None
 
     for key, value in params.items():
-        if key == 'Fixed_year':
+        if value is not None and str.isdigit(value):
             value = int(value)
         if value is not None:
             if group is None:
