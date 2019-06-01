@@ -44,6 +44,7 @@ def get_lowest_rate_group_by(data, params):
 
     for key, value in params.items():
         if value is not None:
+            value = str(value)
             if value.replace('.','',1).isdigit():
                value = round(float(value)) 
             if group is None:
