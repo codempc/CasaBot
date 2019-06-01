@@ -43,6 +43,8 @@ def get_lowest_rate_group_by(data, params):
     bank_programs = None
 
     for key, value in params.items():
+        if key == 'Fixed_year':
+            value = int(value)
         if value is not None:
             if group is None:
                 group = data.groupby(key)
@@ -117,7 +119,6 @@ def get_last_updated():
 # get_lowest_bank(bank_name='CommBank (CM)',
 #                 mortgage='IO', yearFixed=1)
 
-# get_lowest_bank('CommBank (CM)')
 # start = time.time()
 # print(get_best_rate('CommBank'))
 # end = time.time()

@@ -89,16 +89,20 @@ def compare_rate(req):
         "bank1": parameters['Australian_Banks'],
         "bank2": parameters['Australian_Banks1'],
         "mortgage": parameters['Mortgage_types'],
-        "year_fixed": parameters['year_fixed']
+        "year_fixed": parameters['year_fixed'],
+        "ownership_status": parameters['ownership_status']
     }
 
     # TODO: Check if bank1 and bank2 are the same. if the same bank, 
     # tell user that he/she put in the same name of bank.
     best_rate_bank1 = get_best_rate(
-        params["bank1"] or None, params["mortgage"] or None, params["year_fixed"] or None)
+        params["bank1"] or None, params["mortgage"] or None, 
+        params["year_fixed"] or None, params['ownership_status'] or None)
+    
     best_rate_bank2 = get_best_rate(
         params["bank2"] or None, params["mortgage"] or
-        best_rate_bank1['repayment_type'], params["year_fixed"] or best_rate_bank1['year_fixed'])
+        best_rate_bank1['repayment_type'], params["year_fixed"] or best_rate_bank1['year_fixed'],
+        params['ownership_status'] or best_rate_bank1['ownership_type'])
 
     response = Random.compare_bank(best_rate_bank1, best_rate_bank2)
     return response
@@ -149,14 +153,16 @@ def compare_followup(req):
     params = {
         "bank": parameters['Australian_Banks'],
         "mortgage": parameters['Mortgage_types'],
-        "fixed_year": parameters['year_fixed']
+        "fixed_year": parameters['year_fixed'],
+        "ownership_status": parameters['ownership_status']
     }
 
     context = get_contexts(req, pos=1)
     old_rate = context['parameters']['rate']
 
     new_best_rate = get_best_rate(
-        params['bank'] or None, params['mortgage'] or None, params['fixed_year'] or None)
+        params['bank'] or None, params['mortgage'] or None, 
+        params['fixed_year'] or None, params['ownership_status'] or None)
 
     response = Random.best_rate_compare_followup(old_rate, new_best_rate)
     return response
@@ -167,10 +173,12 @@ def rate_followup(req):
     params = {
         "bank": parameters['Australian_Banks'],
         "mortgage": parameters['Mortgage_types'],
-        "fixed_year": parameters['year_fixed']
+        "fixed_year": parameters['year_fixed'],
+        "ownership_status": parameters['ownership_status']
     }
     best_rate = get_best_rate(
-        params['bank'] or None, params['mortgage'] or None, params['fixed_year'] or None)
+        params['bank'] or None, params['mortgage'] or None, 
+        params['fixed_year'] or None, params['ownership_status'] or None)
     response = Random.best_bank(
         params, best_rate)
 
