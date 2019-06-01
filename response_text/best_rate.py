@@ -31,7 +31,8 @@
 BEST_RATE_RESPONSE_NO_INPUT = [
     'At the market, the lowest rate at the moment for home loan is {interest_rate}%. '
     ' This rate is exclusively offered by'
-    ' {bank_name}, with a repayment type of {repayment_type}, and year fixed rate of {year_fixed} years',
+    ' {bank_name}, with a repayment type of {repayment_type}, and fixed rate of {year_fixed} years '
+    ' (if it shows "-", this is a variable and not a fix rate)',
     'The lowest rate currently offered by the top banks in Australia is {interest_rate}%. You can get this lowest rate'
     ' if you apply the home loan program with {bank_name} This program is intended for {ownership_status} '
     ' includes a repayment type of {repayment_type}'
@@ -92,7 +93,6 @@ BEST_RATE_RESPONSE_BANK_FIXEDYEAR = [
 BEST_RATE_RESPONSE_BANK_VARIABLE = [
     '{bank_name} has {interest_rate}% as the lowest interest for variable rate if you apply for {repayment_type} program.',
     'The lowest interest for variable rate at {bank_name} is {interest_rate}% with {repayment_type} program.'
-
 ]
 
 BEST_RATE_RESPONSE_MORTGAGE_FIXEDYEAR = [
@@ -115,7 +115,10 @@ BEST_RATE_RESPONSE_ALL_INPUT = [
 ]
 
 BEST_RATE_RESPONSE_ALL_INPUT_VARIABLE = [
-    'The best rate for {bank_name} with a repayment type {repayment_type} and for variable rate is {interest_rate}%',
+    'The best rate for {bank_name} with a repayment type {repayment_type} '
+    'and for variable rate is {interest_rate}%, with an ownership type of {ownership_type}',
     'The best rate at the moment I can find: Bank Name: {bank_name}, '
-    'Repayment Type: {repayment_type}, and for variable rate is {interest_rate}%'
+    'Repayment Type: {repayment_type}, and Variable Rate of: {interest_rate}%',
+    'For the program you applied with repayment type of {repayment_type}, a non fixed variable'
+    ' rate, and ownership type {ownership_type}, the rate is {interest_rate}% '
 ]

@@ -1,5 +1,5 @@
 import random
-from response_text.show_rate import (
+from response_text.best_rate import (
     BEST_RATE_RESPONSE_ONLY_BANK,
     BEST_RATE_RESPONSE_ONLY_REPAYMENT,
     BEST_RATE_RESPONSE_ONLY_FIXEDYEAR,
@@ -90,6 +90,7 @@ class Random:
             bank_name=details['bank_name'],
             interest_rate=details['interest_rate'],
             repayment_type=details['repayment_type'],
+            onwership_type=details['ownership_type'],
             year_fixed=details['year_fixed'],
         )
 

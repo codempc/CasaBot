@@ -16,6 +16,7 @@ scope = ['https://spreadsheets.google.com/feeds',
 creds = ServiceAccountCredentials.from_json_keyfile_name(dir_path + '/bank_secret.json', scope)
 client = gspread.authorize(creds)
 
+
 def view_all_data(file_name):
     sheet = client.open(file_name).sheet1
     # TODO: Get 5 with the highest rate (no condition).
@@ -56,8 +57,8 @@ def get_lowest_rate_group_by(data, params):
         result = data.sort_values(by=['Interest_rate'], ascending=True)
     return result.head(1)
 
+
 def open_sheet():
-    
     # mc = memcache.Client(['127.0.0.1:11211'], debug=0)
     # print(type(mc.get('sheet')))
     # if mc.get('sheet') is None:
@@ -68,10 +69,11 @@ def open_sheet():
 
     # return sheet
     start = time.time()
-    sheet = client.open('Bank_Chatbot_Data').sheet1
+    sheet = client.open('Static').sheet1
     end = time.time()
     print(end - start)
     return sheet
+
 
 def get_best_rate(bank_name=None, mortgage=None, year_fixed=None, ownership_status=None):
     start = time.time()
@@ -93,24 +95,23 @@ def get_best_rate(bank_name=None, mortgage=None, year_fixed=None, ownership_stat
     repayment_type = best_rate['Repayment_type'].item()
     year_fixed = best_rate['Fixed_year'].item()
     interest = best_rate['Interest_rate'].item()
-    ownership = best_rate['Ownership_status'].item()
-    
+    ownership_type = best_rate['Ownership_status'].item()
+
     details = {
         "bank_name": bank,
         "repayment_type": repayment_type,
         "year_fixed": year_fixed,
-        "ownership": ownership,
+        "ownership_type": ownership_type,
         "interest_rate": interest
     }
 
     return details
 
+
 def get_last_updated():
     sheet = open_sheet()
-    
+
     return sheet.acell('K2').value
-
-
 
 # Example:
 # get_lowest_bank(bank_name='CommBank (CM)',
@@ -124,4 +125,3 @@ def get_last_updated():
 # #print(get_best_rate('CommBank'))
 
 # get_last_updated()
-
