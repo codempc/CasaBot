@@ -90,7 +90,7 @@ class Random:
             bank_name=details['bank_name'],
             interest_rate=details['interest_rate'],
             repayment_type=details['repayment_type'],
-            onwership_type=details['ownership_type'],
+            ownership_status=details['ownership_type'],
             year_fixed=details['year_fixed'],
         )
 

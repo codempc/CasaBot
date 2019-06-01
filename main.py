@@ -132,6 +132,7 @@ def best_rate(req):
             "fixed_year": best_rate['year_fixed'],
             "Australian_Banks": best_rate['bank_name'],
             "repayment_type": best_rate['repayment_type'],
+            "ownership_status": best_rate['ownership_type'],
             "rate": best_rate['interest_rate']
         }
     },
