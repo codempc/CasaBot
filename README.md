@@ -1,8 +1,20 @@
 # Home Loan Chatbot (Casabot) with Dialogflow
 
+<https://github.com/knightfall/UTS-RP19-OSHC_CHATBOT>
+
 41004: Analytics Capstone Project Deliverable, Autumn 2019.
 Subject Coordinator: Supervisor:
 [Dr. Wei Liu](https://www.uts.edu.au/staff/wei.liu)
+
+## Table of Contents
+
+1. [About](#about)
+2. [Demo](#demo)
+3. [Prerequisities](#prerequisites)
+4. [Installation](#installation)
+5. [Sample Questions](#sample-questions)
+6. [Further Development](#further-development)
+7. [Final Words](#final-words)
 
 ## About
 
@@ -12,7 +24,7 @@ This chatbot intends to educate current and prospective international students i
 
 ## Demo
 
-To see the working demo, click on the links
+To see the working demo, click on the following links
 
 - [Dialogflow Instant Chat](https://bot.dialogflow.com/CasaBot)
 - [Facebook Messenger](m.me/400454180513269)
@@ -21,8 +33,8 @@ To see the working demo, click on the links
 
 To run the chatbot in you will need to have the following
 
-- [Google Drive Account](https://drive.google.com/drive/u/0/) - Google Sheet Setup.
 - [Free Dialogflow account](https://console.dialogflow.com)
+- [Google Drive Account](https://drive.google.com/drive/u/0/) - Google Sheet Setup.
 
 ## Installation
 
@@ -48,4 +60,12 @@ To run the chatbot in you will need to have the following
 
 #### f. Go to 'Integrations' tab below 'Fulfillment' and choose any platform that you would like to integrate with
 
-### Step 2. GoogleSheets Setup
+### Step 2. GoogleSheets Setup (Jojo)
+
+-- David --
+
+## Sample Questions
+
+## Further Development
+
+## Final Words
