@@ -31,8 +31,7 @@ To run the chatbot in you will need to have the following
 #### a. Create your free [Dialogflow](<https://dialogflow.com/docs/getting-started/create-account)> account
 
 #### b. Create the agent
-
-![creating the agent|70%](<https://i.imgur.com/WbNhKp5.png> | width=750){ width=70% }
+![creating the agent|70%](<https://i.imgur.com/IIx9qsf.png> | width=750)
 
 #### c. Go to 'Settings' beside Agents list on top left below Dialogflow icon. Then, access the 'Export and Import' tab. Finally, click the 'Restore From Zip' button
 
