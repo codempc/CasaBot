@@ -27,16 +27,16 @@ To run the chatbot in you will need to have the following
 
 #### a. Create your free [Dialogflow] account (https://dialogflow.com/docs/getting-started/create-account)
 #### b. Create the agent
-![creating the agent](https://i.imgur.com/0p9NtwW.png =250x250)
+![creating the agent](https://i.imgur.com/0p9NtwW.png | width=750)
 
 #### c. Go to 'Settings' beside Agents list on top left below Dialogflow icon. Then, access the 'Export and Import' tab. Finally, click the 'Restore From Zip' button.
-![import agent](https://i.imgur.com/pqJN0tc.png =250x250)
+![import agent](https://i.imgur.com/pqJN0tc.png | width=750)
 
 #### d. Drop the cloned Casabot.zip files and then click the 'Restore' button.
-![overwrite agent with Casabot zip files](https://i.imgur.com/8vetGjn.png =250x250)
+![overwrite agent with Casabot zip files](https://i.imgur.com/8vetGjn.png | width=750)
 
 #### e. Move to 'Fulfillment' tab on the center of the left navigation bar (the one with thunder-like icon). Enable the Webhook and then fill in the URL to handle the webhook requests (you can also use our default one, but you would need to use your own URL to modify the bot behaviour). 
-![Webhook URL and Fulfilment Set up](https://i.imgur.com/fmA9TgA.png =250x250)
+![Webhook URL and Fulfilment Set up](https://i.imgur.com/fmA9TgA.png | width=750)
 
 #### f. Go to 'Integrations' tab below 'Fulfillment' and choose any platform that you would like to integrate with.
 
