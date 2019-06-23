@@ -40,12 +40,11 @@ To run the chatbot in you will need to have the following
 
 #### d. Drop the cloned Casabot.zip files and then click the 'Restore' button
 
-![overwrite agent with Casabot zip files](images/overwrite_agent.png)
-<img src="images/overwrite_agent.png"  width="120" height="120">
+![overwrite agent with Casabot zip files](images/upload_agent.png)
 
 #### e. Move to 'Fulfillment' tab on the center of the left navigation bar (the one with thunder-like icon). Enable the Webhook and then fill in the URL to handle the webhook requests (you can also use our default one, but you would need to use your own URL to modify the bot behaviour)
 
-![Webhook URL and Fulfilment Set up](<https://i.imgur.com/fmA9TgA.png> | width=750)
+![Webhook URL and Fulfilment Set up](images/fulfilment_setup.png)
 
 #### f. Go to 'Integrations' tab below 'Fulfillment' and choose any platform that you would like to integrate with
 
