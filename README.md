@@ -6,8 +6,8 @@ Subject Coordinator: Supervisor:
 
 ## About
 
-Overseas Student Health Cover is the health insurance which allmost all of the international students in Australia have to purchase before applying for student visa. 
-This chatbot intends to educate current and prospective international students in Australia about their OSHC cover, who are the providers and how much do they cost. 
+Overseas Student Health Cover is the health insurance which allmost all of the international students in Australia have to purchase before applying for student visa.
+This chatbot intends to educate current and prospective international students in Australia about their OSHC cover, who are the providers and how much do they cost.
 (David)
 
 ## Demo
@@ -28,17 +28,17 @@ To run the chatbot in you will need to have the following
 
 ### Step 1. Dialogflow
 
-#### a. Create your free [Dialogflow] account (https://dialogflow.com/docs/getting-started/create-account)
+#### a. Create your free [Dialogflow](<https://dialogflow.com/docs/getting-started/create-account)> account
 
 #### b. Create the agent
 
-![creating the agent](<https://i.imgur.com/0p9NtwW.png> | width=750)
+![creating the agent|70%](<https://i.imgur.com/0p9NtwW.png> | width=750)
 
-#### c. Go to 'Settings' beside Agents list on top left below Dialogflow icon. Then, access the 'Export and Import' tab. Finally, click the 'Restore From Zip' button.
+#### c. Go to 'Settings' beside Agents list on top left below Dialogflow icon. Then, access the 'Export and Import' tab. Finally, click the 'Restore From Zip' button
 
-![import agent](<https://i.imgur.com/pqJN0tc.png> | width=750)
+![import agent|70%](<https://i.imgur.com/pqJN0tc.png> | width=750)
 
-#### d. Drop the cloned Casabot.zip files and then click the 'Restore' button.
+#### d. Drop the cloned Casabot.zip files and then click the 'Restore' button
 
 ![overwrite agent with Casabot zip files](<https://i.imgur.com/8vetGjn.png> | width=750)
 
