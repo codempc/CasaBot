@@ -3,18 +3,19 @@
 <https://github.com/knightfall/UTS-RP19-OSHC_CHATBOT>
 
 41004: Analytics Capstone Project Deliverable, Autumn 2019.
-Subject Coordinator: Supervisor:
-[Dr. Wei Liu](https://www.uts.edu.au/staff/wei.liu)
+
+Subject Coordinator: [Dr. Wei Liu](https://www.uts.edu.au/staff/wei.liu)
+Supervisor: [Dr. Wei Liu](https://www.uts.edu.au/staff/wei.liu)
 
 ## Table of Contents
 
-1. [About](#about)
-2. [Demo](#demo)
-3. [Prerequisities](#prerequisites)
-4. [Installation](#installation)
-5. [Sample Questions](#sample-questions)
-6. [Further Development](#further-development)
-7. [Final Words](#final-words)
+1. [About](#markdown-header-about)
+2. [Demo](#markdown-header-demo)
+3. [Prerequisities](#markdown-header-prerequisites)
+4. [Installation](#markdown-header-installation)
+5. [Sample Questions](#markdown-header-ample-questions)
+6. [Further Development](#markdown-header-further-development)
+7. [Final Words](#markdown-header-final-words)
 
 ## About
 
