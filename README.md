@@ -71,6 +71,7 @@ To run the chatbot in you will need to have the following
 
 #### e. Enter Service account details
 ![creating service account key](images/service_account.png)
+
 The service account key is preferable to be a JSON file. Onced you create the key, a JSON file will be automatically downloaded to your computer. Copy that file into your project directory.
 
 #### f. Open the JSON file and copy the client email to the spreadsheet
@@ -100,15 +101,13 @@ Further [reference](<https://erikrood.com/Posts/py_gsheets.html>)
  4. What is P&I repayment type?
  5. How does IO repayment type works?
  6. If I want 5 year variable rate, which bank has the best offer?
- 7. As an investor who needs 5,000,000 AUD, which bank should I go for?
+ 7. As an investor who needs 5,000,000 AUD, which program is the best?
 
 ## Testing
-Example 1                          | Example 2
------------------------------------| ------------------------------- 
-![Example1](images/example_1.png)  | ![Example2](images/example_2.png)
+![Example1](images/example_1.png) ![Example2](images/example_2.png)
 
 ## Further Development
- 1. Utilise proper RDBMS for storing the larger database (i.e. -[MSQL](https://dev.mysql.com/downloads/mysql/) ) 
+ 1. Utilise proper RDBMS for storing the larger database (i.e.[MYSQL](https://dev.mysql.com/downloads/mysql/) ) 
  2. Change the data collection method using API once the Home loan API is developed
 
 ## Final Words
