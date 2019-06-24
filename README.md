@@ -3,6 +3,7 @@
 41004: Analytics Capstone Project Deliverable, Autumn 2019.
 
 Subject Coordinator: [Dr. Wei Liu](https://www.uts.edu.au/staff/wei.liu)
+
 Supervisor: [Dr. Wei Liu](https://www.uts.edu.au/staff/wei.liu)
 
 ## Table of Contents
@@ -26,7 +27,7 @@ In this project, a development version of the chatbot is released and can be tes
 To see the working demo, click on the following links
 
 - [Dialogflow Instant Chat](https://bot.dialogflow.com/CasaBot)
-- [Facebook Messenger](m.me/400454180513269)
+- [Facebook Messenger](https://www.messenger.com/t/400454180513269)
 
 ## Prerequisites
 
@@ -121,7 +122,7 @@ The service account key is preferable to be a JSON file. Onced you create the ke
     spreadsheet = client.open('Static').sheet1
     print(spreadsheet.get_all_records())
 
-Further [reference](<https://erikrood.com/Posts/py_gsheets.html>)
+For Further reference, go to a great tutorial created by [Erik](<https://erikrood.com/Posts/py_gsheets.html>) to help you getting started with setting up your GoogleSheet API.
 
 ## Sample Questions
 
