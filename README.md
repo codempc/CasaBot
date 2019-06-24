@@ -12,8 +12,9 @@ Supervisor: [Dr. Wei Liu](https://www.uts.edu.au/staff/wei.liu)
 3. [Prerequisities](#markdown-header-prerequisites)
 4. [Installation](#markdown-header-installation)
 5. [Sample Questions](#markdown-header-sample-questions)
-6. [Further Development](#markdown-header-further-development)
-7. [Final Words](#markdown-header-final-words)
+6. [Testing](#markdown-header-testing)
+7. [Further Development](#markdown-header-further-development)
+8. [Final Words](#markdown-header-final-words)
 
 ## About
 
@@ -36,7 +37,27 @@ To run the chatbot in you will need to have the following
 
 ## Installation
 
-### Step 1. Dialogflow
+### Step 1. Set up your own Domain Name Server
+
+#### a. Set up your server to handle webhook call to be used for fulfilment in dialogflow or use our sample webhook server link to start (<http://casabot.herokuapp.com>)
+
+#### b. If you decide to set up your own server. You can clone our heroku server. First, create a [heroku](<https://dashboard.heroku.com/login>) account
+
+#### c. Create new app and name it anything you like
+
+![Create Heroku](images/create_heroku.png) ![Continue Create Heroku](images/continue_create_heroku.png)
+
+#### d. Using terminal, add the heroku remote repository (if it prompts you to login, login with your credentials)
+
+    $ heroku git:remote -a homeloanbot
+
+#### e. Deploy the cloned application
+
+    $ git add .
+    $ git commit -am "cloned casabot server"
+    $ git push heroku master
+
+### Step 2. Dialogflow
 
 #### a. Create your free [Dialogflow](<https://dialogflow.com/docs/getting-started/create-account>) account
 
@@ -58,28 +79,35 @@ To run the chatbot in you will need to have the following
 
 #### f. Go to 'Integrations' tab below 'Fulfillment' and choose any platform that you would like to integrate with
 
-### Step 2. GoogleSheets Setup (Jojo)
+### Step 3. GoogleSheets Setup
+
 #### a. Go to [Google API Console](<https://console.developers.google.com>) and sign in
 
-#### b. Create a project
+#### b. Create a project (You can name it anything)
+
 ![creating a project](images/create_project.png)
 
-#### c. Enabling Google Sheets and Google Drive APIs
+#### c. Enable Google Sheets and Google Drive APIs
 
 #### d. Create Credentials and select Service Account Key
+
 ![creating credentials](images/create_credentials.png)
 
 #### e. Enter Service account details
+
 ![creating service account key](images/service_account.png)
 The service account key is preferable to be a JSON file. Onced you create the key, a JSON file will be automatically downloaded to your computer. Copy that file into your project directory.
 
 #### f. Open the JSON file and copy the client email to the spreadsheet
+
 ![client email](images/client_email.png)
 
 #### g. Copy the sample database (for demo purpose get the 'static.xlsx') to Google Drive and share the file to the client email
+
 ![sharing spreadsheet](images/share_client.png)
 
 #### h. Set up in Python
+
     import gspread
     from oauth2client.service_account import ServiceAccountCredentials
 
@@ -91,7 +119,6 @@ The service account key is preferable to be a JSON file. Onced you create the ke
     #Example to view the spreadsheet:
     spreadsheet = client.open('Static').sheet1
     print(spreadsheet.get_all_records())
-
 
 ## Sample Questions
 
