@@ -140,7 +140,7 @@ For Further reference, go to a great tutorial created by [Erik](<https://erikroo
 
 ## Further Development
 
- 1. Utilise proper RDBMS for storing the larger database (i.e.[MYSQL](https://dev.mysql.com/downloads/mysql/) ) 
+ 1. Utilise proper RDBMS for storing the larger database (i.e. [MYSQL](<https://dev.mysql.com/downloads/mysql/>))
  2. Change the data collection method using API once the Home loan API is developed
 
 ## Final Words
