@@ -1,7 +1,5 @@
 # Home Loan Chatbot (Casabot) with Dialogflow
 
-<https://github.com/knightfall/UTS-RP19-OSHC_CHATBOT>
-
 41004: Analytics Capstone Project Deliverable, Autumn 2019.
 
 Subject Coordinator: [Dr. Wei Liu](https://www.uts.edu.au/staff/wei.liu)
@@ -13,15 +11,14 @@ Supervisor: [Dr. Wei Liu](https://www.uts.edu.au/staff/wei.liu)
 2. [Demo](#markdown-header-demo)
 3. [Prerequisities](#markdown-header-prerequisites)
 4. [Installation](#markdown-header-installation)
-5. [Sample Questions](#markdown-header-ample-questions)
+5. [Sample Questions](#markdown-header-sample-questions)
 6. [Further Development](#markdown-header-further-development)
 7. [Final Words](#markdown-header-final-words)
 
 ## About
 
-Overseas Student Health Cover is the health insurance which allmost all of the international students in Australia have to purchase before applying for student visa.
-This chatbot intends to educate current and prospective international students in Australia about their OSHC cover, who are the providers and how much do they cost.
-(David)
+Casabot is founded in 2019 by David, Jonathan and Limyandi. Our mission is to make a great artificial intelligence product to ease people to get accurate, quick, and reliable information on home loan rate.
+In this project, a development version of the chatbot is released and can be tested in Dialogflow and Facebook messenger, to help user to get accurate and reliable home loan rate offered by top Australian Banks.
 
 ## Demo
 
