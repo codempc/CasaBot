@@ -59,8 +59,39 @@ To run the chatbot in you will need to have the following
 #### f. Go to 'Integrations' tab below 'Fulfillment' and choose any platform that you would like to integrate with
 
 ### Step 2. GoogleSheets Setup (Jojo)
+#### a. Go to [Google API Console](<https://console.developers.google.com>) and sign in
 
--- David --
+#### b. Create a project
+![creating a project](images/create_project.png)
+
+#### c. Enabling Google Sheets and Google Drive APIs
+
+#### d. Create Credentials and select Service Account Key
+![creating credentials](images/create_credentials.png)
+
+#### e. Enter Service account details
+![creating service account key](images/service_account.png)
+The service account key is preferable to be a JSON file. Onced you create the key, a JSON file will be automatically downloaded to your computer. Copy that file into your project directory.
+
+#### f. Open the JSON file and copy the client email to the spreadsheet
+![client email](images/client_email.png)
+
+#### g. Copy the sample database (for demo purpose get the 'static.xlsx') to Google Drive and share the file to the client email
+![sharing spreadsheet](images/share_client.png)
+
+#### h. Set up in Python
+    import gspread
+    from oauth2client.service_account import ServiceAccountCredentials
+
+    scope = ['https://spreadsheets.google.com/feeds',
+    'https://www.googleapis.com/auth/drive']
+    creds = ServiceAccountCredentials.from_json_keyfile_name('Casa Bot1-ef1391ca5341.JSON', scope)
+    client = gspread.authorize(creds)
+
+    #Example to view the spreadsheet:
+    spreadsheet = client.open('Static').sheet1
+    print(spreadsheet.get_all_records())
+
 
 ## Sample Questions
 
