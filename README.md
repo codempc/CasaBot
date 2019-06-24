@@ -94,7 +94,22 @@ The service account key is preferable to be a JSON file. Onced you create the ke
 
 
 ## Sample Questions
+ 1. What is the best rate for Commbank at the moment?
+ 2. Please compare this bank to NAB
+ 3. Can you tell me the best P&I Fixed rate home loan at the market?
+ 4. What is P&I repayment type?
+ 5. How does IO repayment type works?
+ 6. If I want 5 year variable rate, which bank has the best offer?
+ 7. As an investor who needs 5,000,000 AUD, which bank should I go for?
+
+## Testing
+Example 1                          | Example 2
+-----------------------------------| ------------------------------- 
+![Example1](images/example_1.png)  | ![Example2](images/example_2.png)
 
 ## Further Development
+ 1. Utilise proper RDBMS for storing the larger database (i.e. -[MSQL](https://dev.mysql.com/downloads/mysql/) ) 
+ 2. Change the data collection method using API once the Home loan API is developed
 
 ## Final Words
+If you have any problem regarding the chatbot, please feel free to contact us via utsbankchatbot@gmail.com
