@@ -104,7 +104,7 @@ Further [reference](<https://erikrood.com/Posts/py_gsheets.html>)
  7. As an investor who needs 5,000,000 AUD, which program is the best?
 
 ## Testing
-![Example1](images/example_1.png) ![Example2](images/example_2.png)
+![Example1](images/example_1.PNG) ![Example2](images/example_2.PNG)
 
 ## Further Development
  1. Utilise proper RDBMS for storing the larger database (i.e.[MYSQL](https://dev.mysql.com/downloads/mysql/) ) 
