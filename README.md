@@ -96,6 +96,7 @@ To run the chatbot in you will need to have the following
 #### e. Enter Service account details
 
 ![creating service account key](images/service_account.png)
+
 The service account key is preferable to be a JSON file. Onced you create the key, a JSON file will be automatically downloaded to your computer. Copy that file into your project directory.
 
 #### f. Open the JSON file and copy the client email to the spreadsheet
@@ -120,8 +121,27 @@ The service account key is preferable to be a JSON file. Onced you create the ke
     spreadsheet = client.open('Static').sheet1
     print(spreadsheet.get_all_records())
 
+Further [reference](<https://erikrood.com/Posts/py_gsheets.html>)
+
 ## Sample Questions
+
+ 1. What is the best rate for Commbank at the moment?
+ 2. Please compare this bank to NAB
+ 3. Can you tell me the best P&I Fixed rate home loan at the market?
+ 4. What is P&I repayment type?
+ 5. How does IO repayment type works?
+ 6. If I want 5 year variable rate, which bank has the best offer?
+ 7. As an investor who needs 5,000,000 AUD, which program is the best?
+
+## Testing
+
+![Example1](images/example_1.PNG) ![Example2](images/example_2.PNG)
 
 ## Further Development
 
+ 1. Utilise proper RDBMS for storing the larger database (i.e.[MYSQL](https://dev.mysql.com/downloads/mysql/) ) 
+ 2. Change the data collection method using API once the Home loan API is developed
+
 ## Final Words
+
+All the best trying out. If you have any problem or feedback regarding setting up or usage of the product, please feel free to contact us via utsbankchatbot@gmail.com
